@@ -1,0 +1,28 @@
+/* red h1 */
+h1 {
+  color: #d667ff !important; /* tomato red */
+  font-size: 1.2em !important;
+}
+
+/* orange h2 */
+h2 {
+  color: #a973e3 !important; /* orange */
+  font-size: 1.1em !important;
+}
+
+/* other headings */
+h3, h4, h5, h6 {
+  color: #e46fbdde !important;
+  font-size: 1em !important;
+}
+
+.terminal-mkdocs-side-nav-item--active {
+  color: #f8cfff !important; /* bright yellow text */
+  font-weight: bold;
+}
+
+/* site title style */
+a.no-style {
+  font-size: 1.4em !important;
+  color: #ffbb00 !important; 
+}

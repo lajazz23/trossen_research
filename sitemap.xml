@@ -1,3 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <url>
+         <loc>https://lajazz23.github.io/trossen_research/</loc>
+         <lastmod>2025-09-29</lastmod>
+    </url>
+    <url>
+         <loc>https://lajazz23.github.io/trossen_research/embodied/</loc>
+         <lastmod>2025-09-29</lastmod>
+    </url>
+    <url>
+         <loc>https://lajazz23.github.io/trossen_research/foundation/</loc>
+         <lastmod>2025-09-29</lastmod>
+    </url>
+    <url>
+         <loc>https://lajazz23.github.io/trossen_research/imitation/</loc>
+         <lastmod>2025-09-29</lastmod>
+    </url>
+    <url>
+         <loc>https://lajazz23.github.io/trossen_research/sensors/</loc>
+         <lastmod>2025-09-29</lastmod>
+    </url>
+    <url>
+         <loc>https://lajazz23.github.io/trossen_research/trossen/</loc>
+         <lastmod>2025-09-29</lastmod>
+    </url>
 </urlset>
