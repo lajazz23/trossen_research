@@ -10,7 +10,7 @@
     
     <meta name="author" content="lajazz23"> 
     
-    <link rel="canonical" href="https://lajazz23.github.io/trossen_research/embodied/"><link rel="icon" type="image/png" sizes="192x192" href="../img/android-chrome-192x192.png" />
+    <link rel="canonical" href="https://lajazz23.github.io/trossen_research/pi/"><link rel="icon" type="image/png" sizes="192x192" href="../img/android-chrome-192x192.png" />
 <link rel="icon" type="image/png" sizes="512x512" href="../img/android-chrome-512x512.png" />
 <link rel="apple-touch-icon" sizes="180x180" href="../img/apple-touch-icon.png" />
 <link rel="shortcut icon" type="image/png" sizes="48x48" href="../img/favicon.ico" />
@@ -20,7 +20,7 @@
 
     
  
-<title>Embodied AI - Research for Trossen MobileAI</title>
+<title>Pi0.5 - Research for Trossen MobileAI</title>
 
 
 <link href="../css/fontawesome/css/fontawesome.min.css" rel="stylesheet">
@@ -196,13 +196,17 @@
             
     
         
-        <span class="
+        
+            
+            
+            <span class="
         
             
         
     
 
-    terminal-mkdocs-side-nav-item--active terminal-mkdocs-side-nav-section-no-index">Robotics:</span>
+    terminal-mkdocs-side-nav-item terminal-mkdocs-side-nav-section-no-index">Robotics:</span>
+        
     
     
         
@@ -277,9 +281,11 @@
                 <li class="terminal-mkdocs-side-nav-li-ul-li">
     
         
-        <span class="
+        
+            <a class="
 
-    terminal-mkdocs-side-nav-item--active">Embodied AI</span>
+    terminal-mkdocs-side-nav-item" href="../embodied/">Embodied AI</a>
+        
     
     </li>
             
@@ -365,17 +371,13 @@
             
     
         
-        
-            
-            
-            <span class="
+        <span class="
         
             
         
     
 
-    terminal-mkdocs-side-nav-item terminal-mkdocs-side-nav-section-no-index">Pre-trained Policies :</span>
-        
+    terminal-mkdocs-side-nav-item--active terminal-mkdocs-side-nav-section-no-index">Pre-trained Policies :</span>
     
     
         
@@ -412,11 +414,9 @@
                 <li class="terminal-mkdocs-side-nav-li-ul-li">
     
         
-        
-            <a class="
+        <span class="
 
-    terminal-mkdocs-side-nav-item" href="../pi/">Pi0.5</a>
-        
+    terminal-mkdocs-side-nav-item--active">Pi0.5</span>
     
     </li>
             
@@ -469,43 +469,116 @@
 </nav><hr>
 <nav>
     <ul>
-        <li><a href="#embodied-artificial-intelligence">Embodied Artificial Intelligence</a></li>
-        <li><a href="#key-concepts">Key Concepts</a></li><li><a href="#references">References</a></li>
+        <li><a href="#05">π0.5</a></li>
+        <li><a href="#overview">Overview</a></li><li><a href="#previous-work-significance">Previous Work / Significance</a></li><li><a href="#training-and-model-structure">Training and Model Structure</a></li><li><a href="#multimodal-grounding">Multimodal Grounding</a></li><li><a href="#action-expert">Action Expert</a></li><li><a href="#hardware-control-system">Hardware Control System</a></li><li><a href="#experimental-evaluation">Experimental Evaluation</a></li><li><a href="#limitations">Limitations</a></li>
     </ul>
 </nav>
 </aside>
             <main id="terminal-mkdocs-main-content">
 <section id="mkdocs-terminal-content">
-    <h1 id="embodied-artificial-intelligence">Embodied Artificial Intelligence</h1>
-<p>Embodied Artificial Intelligence (Embodied AI) refers to the implementation of artificial intelligence into <strong>physical robots that interact with the real world</strong>.</p>
+    <h1 id="05">π0.5</h1>
+<p>π0.5 is a <strong>multimodal vision-language-action (VLA) model</strong> used to reason and understand scenes and instructions.  </p>
 <hr />
-<h2 id="key-concepts">Key Concepts</h2>
+<h2 id="overview">Overview</h2>
 <ul>
-<li>Embodied AI combines <strong>computer vision</strong> and <strong>machine learning</strong>.  </li>
-<li>
-<p><strong>Training process:</strong>  </p>
-<ol>
-<li><strong>Pre-training:</strong> on large datasets (web, real-world, synthetic data)  </li>
-<li><strong>Post-training:</strong> synthetic data is used to test and refine the models  </li>
-<li><strong>Deployment:</strong> the model is applied in real environments using computer vision, vision-language models (VLMs), and large language models (LLMs)  </li>
-</ol>
-</li>
-<li>
-<p><strong>Real-time interaction:</strong>  </p>
-<ul>
-<li>Agents take in <strong>contextual information</strong> from their surroundings.  </li>
-<li>Process information, plan actions, and execute them using <strong>actuators</strong>.  </li>
-<li>Behaviors respond to <strong>continuous environmental stimuli</strong>, adapting future inputs and actions for learning.  </li>
-<li>The models are “intelligent”—able to <strong>reason and adapt</strong>.  </li>
-</ul>
-</li>
+<li>Uses <strong>co-training on heterogeneous tasks</strong> to enable broad generalization  </li>
+<li>Trains on <strong>data from multiple robots</strong>, high-level semantic predictions, web data, and other sources  </li>
+<li>Capable of <strong>dexterous tasks</strong>, such as cleaning homes  </li>
+<li>Robots only become useful <strong>outside the lab</strong> in real-world scenarios  </li>
+<li>Can deduce actions for tasks on their own and <strong>transfer knowledge from other systems</strong>  </li>
+<li>Streamlines multiple types of data into a single readable datasheet  </li>
+<li>Can perform tasks it has <strong>not been explicitly trained on</strong>, by dividing them into subtasks automatically  </li>
+<li>Uses a <strong>hierarchical architecture</strong> with 2 levels:  </li>
+<li>Base model trained on many tasks  </li>
+<li>Fine-tuned for real robot tasks  </li>
+<li>Predicts the <strong>next semantic subtask</strong> by generating short action tasks  </li>
 </ul>
 <hr />
-<h2 id="references">References</h2>
+<h2 id="previous-work-significance">Previous Work / Significance</h2>
 <ul>
-<li><a href="https://www.nvidia.com/en-us/glossary/embodied-ai/">NVIDIA: Embodied AI Glossary</a>  </li>
-<li><a href="https://arxiv.org/pdf/2505.05108">ArXiv Paper</a>  </li>
-<li><a href="https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&amp;arnumber=9687596">IEEE Paper</a>  </li>
+<li>Earlier robots were <strong>narrowly trained and limited</strong>  </li>
+<li>Modern models can perform more tasks in more environments across different robot types  </li>
+<li>VLAs take <strong>visual + language input</strong> and output clean actions  </li>
+<li>Co-trained on videos with subtitles, robot simulations, text descriptions, and manual demos  </li>
+<li>π0.5 combines:  </li>
+<li>Web-scale vision-language data  </li>
+<li>Simulation &amp; robot demos  </li>
+<li>Semantic labels &amp; verbal instructions  </li>
+<li>Knowledge transferred from other robots  </li>
+<li>Goal: <strong>generalization across unseen objects, instructions, environments, and untrained tasks</strong>  </li>
+</ul>
+<hr />
+<h2 id="training-and-model-structure">Training and Model Structure</h2>
+<ul>
+<li><strong>Base model:</strong> vision-language model that understands scenes and semantics  </li>
+<li>Built on strong visual-language priors  </li>
+<li><strong>Pre-training:</strong> enables robot to understand relevant tasks  </li>
+<li>Inputs/outputs are converted into <strong>discrete tokens</strong>  </li>
+<li><strong>Post-training:</strong> specializes the model for <strong>mobile manipulation</strong>  </li>
+<li>Includes an <strong>action expert</strong> predicting low-level control actions  </li>
+<li>Outputs detailed motor commands for subtasks  </li>
+<li>Model <strong>input:</strong> images or robot state  </li>
+<li>Model <strong>output:</strong> string tokens and motor commands  </li>
+<li><strong>Data blending:</strong> converts all inputs into tokens for efficiency  </li>
+<li>Uses <strong>discrete tokens</strong> + <strong>flow-matching</strong> simultaneously  </li>
+<li>Flow-matching produces smooth actions  </li>
+<li>Discrete tokens compress data for prediction  </li>
+<li><strong>Training:</strong> autoregressive transformer predicts next token in sequence  </li>
+<li><strong>Testing:</strong> skips token decoding, uses flow-matching for action execution  </li>
+</ul>
+<hr />
+<h2 id="multimodal-grounding">Multimodal Grounding</h2>
+<ul>
+<li>Model learns tasks <strong>may differ across robots/environments</strong>  </li>
+<li>Follows a <strong>hierarchical plan</strong>  </li>
+<li>Multimodal grounding:  </li>
+<li><strong>Language ↔ Vision:</strong> identifies subjects in tasks (e.g., cup location, floor texture, color)  </li>
+<li><strong>Vision ↔ Action:</strong> maps object location to controlled actions  </li>
+<li><strong>Language ↔ Action:</strong> interprets text instructions into trajectories  </li>
+<li><strong>Vision + Language ↔ Action:</strong> generates action tokens/flow vectors from image + text  </li>
+<li>Uses <strong>images</strong> to perceive surroundings, <strong>language</strong> to determine intent, and decides <strong>actions</strong>  </li>
+<li>Learns <strong>relationships between text, images, and motion</strong>  </li>
+</ul>
+<hr />
+<h2 id="action-expert">Action Expert</h2>
+<ul>
+<li>Predicts <strong>continuous actions</strong> using flow-matching  </li>
+<li>Outputs <strong>real-valued control vectors</strong>, e.g., joint angles, base velocities  </li>
+</ul>
+<hr />
+<h2 id="hardware-control-system">Hardware Control System</h2>
+<ul>
+<li>Experiment run on <strong>two mobile manipulator platforms</strong>  </li>
+<li>π0.5 outputs <strong>target poses</strong> for:  </li>
+<li>Each arm joint  </li>
+<li>Gripper position  </li>
+<li>Torso lift  </li>
+<li>Base  </li>
+<li>Predicts <strong>multi-step action chunks</strong> instead of step-by-step actions  </li>
+<li>Can produce plans for <strong>different robot configurations</strong>  </li>
+<li>Fuses <strong>multi-view visual data</strong> across tasks  </li>
+</ul>
+<hr />
+<h2 id="experimental-evaluation">Experimental Evaluation</h2>
+<ul>
+<li>Robots successfully accomplished tasks in <strong>mock and real environments</strong>  </li>
+<li><strong>More diverse training environments</strong> → better generalization  </li>
+<li><strong>Full pre-training</strong> is necessary for optimal results  </li>
+<li>Mixed data: web, robot, subtask annotations  </li>
+<li>High training exposure improves <strong>language following / prompt understanding</strong>  </li>
+<li><strong>High-level interference:</strong> robot determines the next task  </li>
+<li><strong>Domain-specific robot data</strong> critical for planning:  </li>
+<li>Object names and relationships  </li>
+<li>Human instructions  </li>
+<li>Subtask breakdown  </li>
+</ul>
+<hr />
+<h2 id="limitations">Limitations</h2>
+<ul>
+<li>Unfamiliar items in environments remain challenging  </li>
+<li>Partial observability affects robot function (e.g., arm blocking view)  </li>
+<li>High-level subtask interference can cause repeated actions or distractions  </li>
+<li>Can only process <strong>simple prompts</strong> (e.g., "clean this up")  </li>
 </ul>
 <hr />
 <p>Made by Jasmin Lin.</p>
@@ -520,9 +593,9 @@
         </div>
         <div id="terminal-mkdocs-footer-prev-next">
             <nav class="btn-group">
-                <a href="../foundation/" title="Foundation Models">Previous</a>
+                <a href="../groot/" title="GR00T-N1/1.5">Previous</a>
                 |
-                <a href="../trossen/" title="Trossen MobileAI">Next</a>
+                <a href="../rt/" title="RT-1">Next</a>
             </nav>
         </div>
     </div>

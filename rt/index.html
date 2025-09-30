@@ -10,7 +10,7 @@
     
     <meta name="author" content="lajazz23"> 
     
-    <link rel="canonical" href="https://lajazz23.github.io/trossen_research/embodied/"><link rel="icon" type="image/png" sizes="192x192" href="../img/android-chrome-192x192.png" />
+    <link rel="canonical" href="https://lajazz23.github.io/trossen_research/rt/"><link rel="icon" type="image/png" sizes="192x192" href="../img/android-chrome-192x192.png" />
 <link rel="icon" type="image/png" sizes="512x512" href="../img/android-chrome-512x512.png" />
 <link rel="apple-touch-icon" sizes="180x180" href="../img/apple-touch-icon.png" />
 <link rel="shortcut icon" type="image/png" sizes="48x48" href="../img/favicon.ico" />
@@ -20,7 +20,7 @@
 
     
  
-<title>Embodied AI - Research for Trossen MobileAI</title>
+<title>RT-1 - Research for Trossen MobileAI</title>
 
 
 <link href="../css/fontawesome/css/fontawesome.min.css" rel="stylesheet">
@@ -196,13 +196,17 @@
             
     
         
-        <span class="
+        
+            
+            
+            <span class="
         
             
         
     
 
-    terminal-mkdocs-side-nav-item--active terminal-mkdocs-side-nav-section-no-index">Robotics:</span>
+    terminal-mkdocs-side-nav-item terminal-mkdocs-side-nav-section-no-index">Robotics:</span>
+        
     
     
         
@@ -277,9 +281,11 @@
                 <li class="terminal-mkdocs-side-nav-li-ul-li">
     
         
-        <span class="
+        
+            <a class="
 
-    terminal-mkdocs-side-nav-item--active">Embodied AI</span>
+    terminal-mkdocs-side-nav-item" href="../embodied/">Embodied AI</a>
+        
     
     </li>
             
@@ -365,17 +371,13 @@
             
     
         
-        
-            
-            
-            <span class="
+        <span class="
         
             
         
     
 
-    terminal-mkdocs-side-nav-item terminal-mkdocs-side-nav-section-no-index">Pre-trained Policies :</span>
-        
+    terminal-mkdocs-side-nav-item--active terminal-mkdocs-side-nav-section-no-index">Pre-trained Policies :</span>
     
     
         
@@ -431,11 +433,9 @@
                 <li class="terminal-mkdocs-side-nav-li-ul-li">
     
         
-        
-            <a class="
+        <span class="
 
-    terminal-mkdocs-side-nav-item" href="../rt/">RT-1</a>
-        
+    terminal-mkdocs-side-nav-item--active">RT-1</span>
     
     </li>
             
@@ -469,43 +469,43 @@
 </nav><hr>
 <nav>
     <ul>
-        <li><a href="#embodied-artificial-intelligence">Embodied Artificial Intelligence</a></li>
-        <li><a href="#key-concepts">Key Concepts</a></li><li><a href="#references">References</a></li>
+        <li><a href="#rt-1-google">RT-1 (Google)</a></li>
+        <li><a href="#overview">Overview</a></li><li><a href="#core">Core</a></li><li><a href="#method">Method</a></li>
     </ul>
 </nav>
 </aside>
             <main id="terminal-mkdocs-main-content">
 <section id="mkdocs-terminal-content">
-    <h1 id="embodied-artificial-intelligence">Embodied Artificial Intelligence</h1>
-<p>Embodied Artificial Intelligence (Embodied AI) refers to the implementation of artificial intelligence into <strong>physical robots that interact with the real world</strong>.</p>
+    <h1 id="rt-1-google">RT-1 (Google)</h1>
+<p>RT-1 is a <strong>real-time transformer-based robot policy</strong> that can control real-world robots.  </p>
 <hr />
-<h2 id="key-concepts">Key Concepts</h2>
+<h2 id="overview">Overview</h2>
 <ul>
-<li>Embodied AI combines <strong>computer vision</strong> and <strong>machine learning</strong>.  </li>
-<li>
-<p><strong>Training process:</strong>  </p>
-<ol>
-<li><strong>Pre-training:</strong> on large datasets (web, real-world, synthetic data)  </li>
-<li><strong>Post-training:</strong> synthetic data is used to test and refine the models  </li>
-<li><strong>Deployment:</strong> the model is applied in real environments using computer vision, vision-language models (VLMs), and large language models (LLMs)  </li>
-</ol>
-</li>
-<li>
-<p><strong>Real-time interaction:</strong>  </p>
-<ul>
-<li>Agents take in <strong>contextual information</strong> from their surroundings.  </li>
-<li>Process information, plan actions, and execute them using <strong>actuators</strong>.  </li>
-<li>Behaviors respond to <strong>continuous environmental stimuli</strong>, adapting future inputs and actions for learning.  </li>
-<li>The models are “intelligent”—able to <strong>reason and adapt</strong>.  </li>
-</ul>
-</li>
+<li>Designed for <strong>everyday manipulation tasks</strong>: opening doors, moving objects, etc.  </li>
+<li>Takes <strong>language instructions</strong> and a <strong>short video</strong> from the robot camera to guide actions  </li>
+<li>Learns <strong>directly from human demonstrations</strong>, mimicking actions  </li>
+<li>Capable of <strong>generalization, scaled training, and real-world execution</strong>  </li>
+<li>Can generalize <strong>new tasks without retraining</strong> due to language-conditioning and diverse training  </li>
+<li>Direct <strong>robot control policy</strong> (not a vision-language-action model)  </li>
+<li>Processes a series of images and instructions, not just a single image  </li>
 </ul>
 <hr />
-<h2 id="references">References</h2>
+<h2 id="core">Core</h2>
 <ul>
-<li><a href="https://www.nvidia.com/en-us/glossary/embodied-ai/">NVIDIA: Embodied AI Glossary</a>  </li>
-<li><a href="https://arxiv.org/pdf/2505.05108">ArXiv Paper</a>  </li>
-<li><a href="https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&amp;arnumber=9687596">IEEE Paper</a>  </li>
+<li><strong>Transformer core adapted for robotics</strong>  </li>
+<li><strong>EfficientNet-B3</strong> for image processing  </li>
+<li><strong>FiLM layers</strong> integrate language instructions with visual features  </li>
+<li><strong>TokenLearner</strong> filters for the most relevant information  </li>
+<li>Transformer outputs decisions about the robot’s actions  </li>
+</ul>
+<hr />
+<h2 id="method">Method</h2>
+<ul>
+<li>Inputs processed by the core to <strong>extract and compact visual tokens</strong>  </li>
+<li><strong>Decoder-only transformer</strong> processes tokens and outputs discrete tokens for each limb  </li>
+<li>(π0.5 outputs text tokens, which are then passed to a control policy)  </li>
+<li>Trained on <strong>130k real robot demonstrations</strong>, not just internet data  </li>
+<li>Runs at <strong>3 Hz</strong>, providing fast action response for robot execution  </li>
 </ul>
 <hr />
 <p>Made by Jasmin Lin.</p>
@@ -520,9 +520,9 @@
         </div>
         <div id="terminal-mkdocs-footer-prev-next">
             <nav class="btn-group">
-                <a href="../foundation/" title="Foundation Models">Previous</a>
+                <a href="../pi/" title="Pi0.5">Previous</a>
                 |
-                <a href="../trossen/" title="Trossen MobileAI">Next</a>
+                <a href="../claw/" title="CLAW">Next</a>
             </nav>
         </div>
     </div>

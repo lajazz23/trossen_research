@@ -10,7 +10,7 @@
     
     <meta name="author" content="lajazz23"> 
     
-    <link rel="canonical" href="https://lajazz23.github.io/trossen_research/embodied/"><link rel="icon" type="image/png" sizes="192x192" href="../img/android-chrome-192x192.png" />
+    <link rel="canonical" href="https://lajazz23.github.io/trossen_research/claw/"><link rel="icon" type="image/png" sizes="192x192" href="../img/android-chrome-192x192.png" />
 <link rel="icon" type="image/png" sizes="512x512" href="../img/android-chrome-512x512.png" />
 <link rel="apple-touch-icon" sizes="180x180" href="../img/apple-touch-icon.png" />
 <link rel="shortcut icon" type="image/png" sizes="48x48" href="../img/favicon.ico" />
@@ -20,7 +20,7 @@
 
     
  
-<title>Embodied AI - Research for Trossen MobileAI</title>
+<title>CLAW - Research for Trossen MobileAI</title>
 
 
 <link href="../css/fontawesome/css/fontawesome.min.css" rel="stylesheet">
@@ -196,13 +196,17 @@
             
     
         
-        <span class="
+        
+            
+            
+            <span class="
         
             
         
     
 
-    terminal-mkdocs-side-nav-item--active terminal-mkdocs-side-nav-section-no-index">Robotics:</span>
+    terminal-mkdocs-side-nav-item terminal-mkdocs-side-nav-section-no-index">Robotics:</span>
+        
     
     
         
@@ -277,9 +281,11 @@
                 <li class="terminal-mkdocs-side-nav-li-ul-li">
     
         
-        <span class="
+        
+            <a class="
 
-    terminal-mkdocs-side-nav-item--active">Embodied AI</span>
+    terminal-mkdocs-side-nav-item" href="../embodied/">Embodied AI</a>
+        
     
     </li>
             
@@ -365,17 +371,13 @@
             
     
         
-        
-            
-            
-            <span class="
+        <span class="
         
             
         
     
 
-    terminal-mkdocs-side-nav-item terminal-mkdocs-side-nav-section-no-index">Pre-trained Policies :</span>
-        
+    terminal-mkdocs-side-nav-item--active terminal-mkdocs-side-nav-section-no-index">Pre-trained Policies :</span>
     
     
         
@@ -450,11 +452,9 @@
                 <li class="terminal-mkdocs-side-nav-li-ul-li">
     
         
-        
-            <a class="
+        <span class="
 
-    terminal-mkdocs-side-nav-item" href="../claw/">CLAW</a>
-        
+    terminal-mkdocs-side-nav-item--active">CLAW</span>
     
     </li>
             
@@ -469,44 +469,43 @@
 </nav><hr>
 <nav>
     <ul>
-        <li><a href="#embodied-artificial-intelligence">Embodied Artificial Intelligence</a></li>
-        <li><a href="#key-concepts">Key Concepts</a></li><li><a href="#references">References</a></li>
+        <li><a href="#claw-clip-language-action-for-weight">CLAW (CLIP-Language-Action for Weight)</a></li>
+        <li><a href="#key-features">Key Features</a></li><li><a href="#motivation">Motivation</a></li><li><a href="#claw-pipeline">CLAW Pipeline</a></li>
     </ul>
 </nav>
 </aside>
             <main id="terminal-mkdocs-main-content">
 <section id="mkdocs-terminal-content">
-    <h1 id="embodied-artificial-intelligence">Embodied Artificial Intelligence</h1>
-<p>Embodied Artificial Intelligence (Embodied AI) refers to the implementation of artificial intelligence into <strong>physical robots that interact with the real world</strong>.</p>
+    <h1 id="claw-clip-language-action-for-weight">CLAW (CLIP-Language-Action for Weight)</h1>
+<p><strong>CLAW</strong> is a <strong>weight-aware Vision-Language-Action (VLA) model</strong> that decouples condition evaluation from action generation.  </p>
 <hr />
-<h2 id="key-concepts">Key Concepts</h2>
+<h2 id="key-features">Key Features</h2>
 <ul>
-<li>Embodied AI combines <strong>computer vision</strong> and <strong>machine learning</strong>.  </li>
-<li>
-<p><strong>Training process:</strong>  </p>
+<li>Uses a <strong>condition-monitoring module</strong> to evaluate numeric task constraints (e.g., weight thresholds) for action output.  </li>
+<li>Combines <strong>CLIP</strong> and <strong>π0</strong> for continuous visuomotor control:  </li>
+<li><strong>CLIP</strong> converts numeric readings into symbolic language prompts, ideal for detecting when a weight threshold is reached.<br />
+        - Determines if the robot should grip harder or stop.  </li>
+<li><strong>π0</strong> produces continuous, high-frequency robot actions from <strong>multi-view observations</strong>.<br />
+        - Maps observations + language input into continuous motor commands.  </li>
+<li>Together:<br />
+        - CLIP labels the task ("grip" or "no grip")<br />
+        - Passes this prompt to π0<br />
+        - π0 is fine-tuned using <strong>flow-matching loss</strong> conditioned on the prompts  </li>
+</ul>
+<hr />
+<h2 id="motivation">Motivation</h2>
+<ul>
+<li>Standard VLAs often struggle with <strong>precise execution</strong>, particularly for manipulation tasks like <strong>picking up objects</strong>.  </li>
+<li>CLAW addresses this by integrating <strong>weight awareness</strong> into the decision-making process.  </li>
+</ul>
+<hr />
+<h2 id="claw-pipeline">CLAW Pipeline</h2>
 <ol>
-<li><strong>Pre-training:</strong> on large datasets (web, real-world, synthetic data)  </li>
-<li><strong>Post-training:</strong> synthetic data is used to test and refine the models  </li>
-<li><strong>Deployment:</strong> the model is applied in real environments using computer vision, vision-language models (VLMs), and large language models (LLMs)  </li>
+<li><strong>Language Input</strong>  </li>
+<li><strong>CLIP</strong> monitors the scale → outputs “stop” or “continue” based on weight threshold  </li>
+<li><strong>π0</strong> generates continuous robot actions using the CLIP prompt + multi-view images  </li>
+<li>Loop continues until the <strong>target weight is reached</strong>  </li>
 </ol>
-</li>
-<li>
-<p><strong>Real-time interaction:</strong>  </p>
-<ul>
-<li>Agents take in <strong>contextual information</strong> from their surroundings.  </li>
-<li>Process information, plan actions, and execute them using <strong>actuators</strong>.  </li>
-<li>Behaviors respond to <strong>continuous environmental stimuli</strong>, adapting future inputs and actions for learning.  </li>
-<li>The models are “intelligent”—able to <strong>reason and adapt</strong>.  </li>
-</ul>
-</li>
-</ul>
-<hr />
-<h2 id="references">References</h2>
-<ul>
-<li><a href="https://www.nvidia.com/en-us/glossary/embodied-ai/">NVIDIA: Embodied AI Glossary</a>  </li>
-<li><a href="https://arxiv.org/pdf/2505.05108">ArXiv Paper</a>  </li>
-<li><a href="https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&amp;arnumber=9687596">IEEE Paper</a>  </li>
-</ul>
 <hr />
 <p>Made by Jasmin Lin.</p>
 </section>
@@ -520,9 +519,8 @@
         </div>
         <div id="terminal-mkdocs-footer-prev-next">
             <nav class="btn-group">
-                <a href="../foundation/" title="Foundation Models">Previous</a>
-                |
-                <a href="../trossen/" title="Trossen MobileAI">Next</a>
+                <a href="../rt/" title="RT-1">Previous</a>
+                
             </nav>
         </div>
     </div>
