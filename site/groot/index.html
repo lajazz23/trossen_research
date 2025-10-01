@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="generator" content="mkdocs-1.6.1, mkdocs-terminal-4.7.0">
+     
+    
+    <meta name="author" content="lajazz23"> 
+    
+    <link rel="canonical" href="https://lajazz23.github.io/trossen_research/groot/"><link rel="icon" type="image/png" sizes="192x192" href="../img/android-chrome-192x192.png" />
+<link rel="icon" type="image/png" sizes="512x512" href="../img/android-chrome-512x512.png" />
+<link rel="apple-touch-icon" sizes="180x180" href="../img/apple-touch-icon.png" />
+<link rel="shortcut icon" type="image/png" sizes="48x48" href="../img/favicon.ico" />
+<link rel="icon" type="image/png" sizes="16x16" href="../img/favicon-16x16.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="../img/favicon-32x32.png" />
+
+
+    
+ 
+<title>GR00T-N1/1.5 - Research for Trossen MobileAI</title>
+
+
+<link href="../css/fontawesome/css/fontawesome.min.css" rel="stylesheet">
+<link href="../css/fontawesome/css/solid.min.css" rel="stylesheet">
+<link href="../css/normalize.css" rel="stylesheet">
+<link href="../css/terminal.css" rel="stylesheet">
+<link href="../css/theme.css" rel="stylesheet">
+<link href="../css/theme.tile_grid.css" rel="stylesheet">
+<link href="../css/theme.footer.css" rel="stylesheet">
+<!-- dark color palette -->
+<link href="../css/palettes/dark.css" rel="stylesheet">
+
+<!-- page layout -->
+<style>
+/* initially set page layout to a one column grid */
+.terminal-mkdocs-main-grid {
+    display: grid;
+    grid-column-gap: 1.4em;
+    grid-template-columns: auto;
+    grid-template-rows: auto;
+}
+
+/*  
+*   when side navigation is not hidden, use a two column grid.  
+*   if the screen is too narrow, fall back to the initial one column grid layout.
+*   in this case the main content will be placed under the navigation panel. 
+*/
+@media only screen and (min-width: 70em) {
+    .terminal-mkdocs-main-grid {
+        grid-template-columns: 4fr 9fr;
+    }
+}</style>
+
+<!-- cursor_animation override -->
+<style>
+  #mkdocs-terminal-site-name.terminal-prompt::after {
+      display: none;
+  }
+</style>
+
+    
+    <link href="../overrides/extra.css" rel="stylesheet">  
+    
+    
+
+    
+    <!-- search css support -->
+<link href="../css/search/bootstrap-modal.css" rel="stylesheet">
+<!-- search scripts -->
+<script>
+    var base_url = "..",
+    shortcuts = "{}";
+</script>
+<script src="../js/jquery/jquery-1.10.1.min.js" defer></script>
+<script src="../js/bootstrap/bootstrap.min.js" defer></script>
+<script src="../js/mkdocs/base.js" defer></script>
+    
+    
+    
+    
+    <script src="../search/main.js"></script>
+    
+
+    
+</head>
+
+<body class="terminal"><div class="container">
+    <div class="terminal-nav">
+        <header class="terminal-logo">
+            <div id="mkdocs-terminal-site-name" class="logo terminal-prompt"><a href="https://lajazz23.github.io/trossen_research/" class="no-style">Research for Trossen MobileAI</a></div>
+        </header>
+        
+        <nav class="terminal-menu">
+            
+            <ul vocab="https://schema.org/" typeof="BreadcrumbList">
+                
+                
+                <li property="itemListElement" typeof="ListItem">
+                    <a href=".." class="menu-item " property="item" typeof="WebPage">
+                        <span property="name">Home</span>
+                    </a>
+                    <meta property="position" content="0">
+                </li>
+                
+                
+                <li property="itemListElement" typeof="ListItem">
+                    <a href="https://github.com/lajazz23/trossen_research" class="menu-item " property="item" typeof="WebPage">
+                        <span property="name">GitHub</span>
+                    </a>
+                    <meta property="position" content="1">
+                </li>
+                
+                
+                
+                
+                
+                
+                
+                    
+                    
+
+
+<li property="itemListElement" typeof="ListItem">
+    <a href="#" class="menu-item" data-toggle="modal" data-target="#mkdocs_search_modal" property="item" typeof="SearchAction">
+        <i aria-hidden="true" class="fa fa-search"></i> <span property="name">Search</span>
+    </a>
+    <meta property="position" content="2">
+</li>
+                    
+            </ul>
+            
+        </nav>
+    </div>
+</div>
+        
+    <div class="container">
+        <div class="terminal-mkdocs-main-grid"><aside id="terminal-mkdocs-side-panel"><nav>
+  
+    <ul class="terminal-mkdocs-side-nav-items">
+        
+          
+
+
+
+<li class="terminal-mkdocs-side-nav-li">
+    
+    
+    
+        
+        
+            <a class="
+
+    terminal-mkdocs-side-nav-item" href="..">Home</a>
+        
+    
+    
+    
+  </li>
+        
+          
+
+
+
+<li class="terminal-mkdocs-side-nav-li">
+    
+    
+    
+        
+        
+            <a class="
+
+    terminal-mkdocs-side-nav-item" href="https://github.com/lajazz23/trossen_research">GitHub</a>
+        
+    
+    
+    
+  </li>
+        
+          
+
+
+
+<li class="terminal-mkdocs-side-nav-li">
+    
+    
+        
+        
+            
+                
+        
+
+        
+            
+    
+        
+        
+            
+            
+            <span class="
+        
+            
+        
+    
+
+    terminal-mkdocs-side-nav-item terminal-mkdocs-side-nav-section-no-index">Robotics:</span>
+        
+    
+    
+        
+      
+        
+            <ul class="terminal-mkdocs-side-nav-li-ul">
+        
+            
+            
+                
+                
+            
+
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="
+
+    terminal-mkdocs-side-nav-item" href="../sensors/">Sensors, Actuators, and Control in Robotics</a>
+        
+    
+    </li>
+            
+        
+            
+            
+                
+                
+            
+
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="
+
+    terminal-mkdocs-side-nav-item" href="../imitation/">Imitation Learning</a>
+        
+    
+    </li>
+            
+        
+            
+            
+                
+                
+            
+
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="
+
+    terminal-mkdocs-side-nav-item" href="../foundation/">Foundation Models</a>
+        
+    
+    </li>
+            
+        
+            
+            
+                
+                
+            
+
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="
+
+    terminal-mkdocs-side-nav-item" href="../embodied/">Embodied AI</a>
+        
+    
+    </li>
+            
+            
+    </ul>
+        
+    
+  </li>
+        
+          
+
+
+
+<li class="terminal-mkdocs-side-nav-li">
+    
+    
+        
+        
+            
+                
+        
+
+        
+            
+    
+        
+        
+            
+            
+            <span class="
+        
+            
+        
+    
+
+    terminal-mkdocs-side-nav-item terminal-mkdocs-side-nav-section-no-index">Trossen:</span>
+        
+    
+    
+        
+      
+        
+            <ul class="terminal-mkdocs-side-nav-li-ul">
+        
+            
+            
+                
+                
+            
+
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="
+
+    terminal-mkdocs-side-nav-item" href="../trossen/">Trossen MobileAI</a>
+        
+    
+    </li>
+            
+            
+    </ul>
+        
+    
+  </li>
+        
+          
+
+
+
+<li class="terminal-mkdocs-side-nav-li">
+    
+    
+        
+        
+            
+                
+        
+
+        
+            
+    
+        
+        <span class="
+        
+            
+        
+    
+
+    terminal-mkdocs-side-nav-item--active terminal-mkdocs-side-nav-section-no-index">Pre-trained Policies :</span>
+    
+    
+        
+      
+        
+            <ul class="terminal-mkdocs-side-nav-li-ul">
+        
+            
+            
+                
+                
+            
+
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        <span class="
+
+    terminal-mkdocs-side-nav-item--active">GR00T-N1/1.5</span>
+    
+    </li>
+            
+        
+            
+            
+                
+                
+            
+
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="
+
+    terminal-mkdocs-side-nav-item" href="../pi/">Pi0.5</a>
+        
+    
+    </li>
+            
+        
+            
+            
+                
+                
+            
+
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="
+
+    terminal-mkdocs-side-nav-item" href="../rt/">RT-1</a>
+        
+    
+    </li>
+            
+        
+            
+            
+                
+                
+            
+
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="
+
+    terminal-mkdocs-side-nav-item" href="../claw/">CLAW</a>
+        
+    
+    </li>
+            
+            
+    </ul>
+        
+    
+  </li>
+        
+    </ul>
+  
+</nav><hr>
+<nav>
+    <ul>
+        <li><a href="#gr00t-n1-nvidia">GR00T N1 (NVIDIA)</a></li>
+        <li><a href="#dual-system-compositional-architecture">Dual-System Compositional Architecture</a></li><li><a href="#data-pyramid-structure">Data Pyramid Structure</a></li><li><a href="#co-training-strategy">Co-Training Strategy</a></li><li><a href="#gr00t-n1-foundation-model">GR00T N1 Foundation Model</a></li><li><a href="#model-architecture">Model Architecture</a></li><li><a href="#generation-of-training-data">Generation of Training Data</a></li><li><a href="#neural-trajectories">Neural Trajectories</a></li><li><a href="#simulation-trajectories">Simulation Trajectories</a></li><li><a href="#training-details">Training Details</a></li>
+    </ul>
+</nav>
+</aside>
+            <main id="terminal-mkdocs-main-content">
+<section id="mkdocs-terminal-content">
+    <h1 id="gr00t-n1-nvidia">GR00T N1 (NVIDIA)</h1>
+<p>GR00T N1 is a <strong>Vision-Language-Action (VLA) model</strong> that generates actions from images and language instruction inputs and uses a <strong>dual-system compositional architecture</strong>.  </p>
+<hr />
+<h2 id="dual-system-compositional-architecture">Dual-System Compositional Architecture</h2>
+<ul>
+<li>Based on human cognition, the model has <strong>two systems</strong>:  </li>
+<li><strong>System 1</strong> – fast, instinctive, automatic  </li>
+<li><strong>System 2</strong> – slow, thoughtful, logical  </li>
+</ul>
+<h3 id="system-2-vision-language-action">System 2 (Vision-Language-Action)</h3>
+<ul>
+<li>Understands words and images together  </li>
+<li>Uses the robot’s camera feed and given instructions to determine actions  </li>
+<li>Operates at <strong>10 Hz</strong>, slower but allows for more reasoning  </li>
+</ul>
+<h3 id="system-1-diffusion-transformer">System 1 (Diffusion Transformer)</h3>
+<ul>
+<li>Uses System 2’s output and its sensors to decide movement  </li>
+<li>Operates at <strong>120 Hz</strong>  </li>
+<li>Uses <strong>diffusion</strong> to ensure smooth motion  </li>
+<li>Cooperates with System 2 (System 1 listens to System 2)  </li>
+</ul>
+<hr />
+<h2 id="data-pyramid-structure">Data Pyramid Structure</h2>
+<ul>
+<li>To prevent data overload, the model organizes data hierarchically:  </li>
+<li><strong>Base:</strong> large quantities of web data and human videos  </li>
+<li><strong>Middle:</strong> synthetic data  </li>
+<li><strong>Top:</strong> real-world data collected by physical robots  </li>
+</ul>
+<hr />
+<h2 id="co-training-strategy">Co-Training Strategy</h2>
+<ul>
+<li>Trains using <strong>action-less data sources</strong> with a <strong>latent-action codebook</strong> and a <strong>trained inverse dynamics model (IDM)</strong>:  </li>
+<li>Latent-action compresses movement patterns into reusable codes for guessing actions without labels  </li>
+<li>IDM predicts missing frames in videos, outputting estimated actions  </li>
+<li>Robot is trained on a <strong>mix of real robot data, synthetic video, and human videos</strong>  </li>
+<li>Eliminates the need for large pools of labeled data  </li>
+</ul>
+<hr />
+<h2 id="gr00t-n1-foundation-model">GR00T N1 Foundation Model</h2>
+<ul>
+<li>A <strong>VLA model</strong> that can interact with its environment  </li>
+<li>Uses <strong>NVIDIA Eagle-2 VLM</strong> as backbone:  </li>
+<li>Understands the image  </li>
+<li>Interprets the goal  </li>
+<li>Encodes information into tokens for downstream analysis  </li>
+<li>Uses the <strong>Diffusion Transformer</strong>:  </li>
+<li>Takes encoded visuals and VLM info  </li>
+<li>Quickly generates movements  </li>
+<li>Performs <strong>flow-matching</strong> for smooth motion  </li>
+</ul>
+<hr />
+<h2 id="model-architecture">Model Architecture</h2>
+<ul>
+<li><strong>State and Action Encoders</strong> normalize representations across robots  </li>
+<li>Small neural net converts actions and raw states into a shared space  </li>
+<li>Action encoder incorporates timesteps  </li>
+<li><strong>Flow matching</strong>: uses ground-truth actions and Gaussian noise to train the model to predict denoising vector fields  </li>
+<li><strong>Eagle-2 VLM</strong> integrates SmolLM2 and SigLIP-2 to interpret images + text instructions  </li>
+<li>Images resized and passed through pixel shuffle  </li>
+<li>Combined with text in a chat-style format  </li>
+<li><strong>Diffusion Transformer</strong> predicts actions from inputs  </li>
+<li>Alternates between processing actions and injecting vision-language features  </li>
+<li>Action decoder outputs clean predicted actions  </li>
+<li>Designed for <strong>multi-robot compatibility</strong>, accommodating different action spaces  </li>
+</ul>
+<hr />
+<h2 id="generation-of-training-data">Generation of Training Data</h2>
+<ul>
+<li>Organized according to the <strong>data pyramid</strong>  </li>
+<li><strong>High-quality data</strong> comes from real humans controlling robots (teleoperation)  </li>
+<li><strong>VQ-VAE</strong> generates latent actions from videos lacking robot action labels  </li>
+<li>Improves efficiency and lowers cost of real robot data  </li>
+</ul>
+<hr />
+<h2 id="neural-trajectories">Neural Trajectories</h2>
+<ul>
+<li>Video generation models synthesize robot behavior based on existing data (~10× more data)  </li>
+<li>Multimodal LLM improves quality/diversity by detecting objects and generating task variations  </li>
+<li>LLM assesses whether generated actions match the intended prompt  </li>
+</ul>
+<hr />
+<h2 id="simulation-trajectories">Simulation Trajectories</h2>
+<ul>
+<li><strong>DexMimicGen</strong> generates large-scale simulated robot data:  </li>
+<li>Breaks data into action chunks  </li>
+<li>Modifies small details (object location) while preserving action  </li>
+<li>Smooth transitions between frames  </li>
+<li>Saves data only if the robot succeeds in simulation  </li>
+</ul>
+<hr />
+<h2 id="training-details">Training Details</h2>
+<ul>
+<li><strong>Pre-training:</strong> flow-matching on real and synthetic robot + human data  </li>
+<li>Extracts latent actions from human videos without ground-truth actions  </li>
+<li><strong>Post-training:</strong> fine-tunes the pretrained model on embodiment-specific datasets  </li>
+<li><strong>Neural trajectories</strong> generate robotic behaviors for missing real-world teleoperation data  </li>
+<li>Generates visuals only  </li>
+<li>Uses latent action codes  </li>
+<li>IDM estimates actions from video changes  </li>
+<li><strong>DexMimicGen</strong> generates high-quality training datasets  </li>
+<li><strong>Source demonstrations</strong> collected via Leap Motion Devices, which DexMimicGen uses to synthesize new demos  </li>
+<li><strong>Evaluation:</strong> tabletop tasks like pick-and-place, object passing, manipulation, coordination  </li>
+</ul>
+<hr />
+<p>Made by Jasmin Lin.</p>
+</section>
+
+            </main>
+        </div>
+        <hr><footer>
+    <div class="terminal-mkdocs-footer-grid">
+        <div id="terminal-mkdocs-footer-copyright-info">
+             Site built with <a href="http://www.mkdocs.org">MkDocs</a> and <a href="https://github.com/ntno/mkdocs-terminal">Terminal for MkDocs</a>.
+        </div>
+        <div id="terminal-mkdocs-footer-prev-next">
+            <nav class="btn-group">
+                <a href="../trossen/" title="Trossen MobileAI">Previous</a>
+                |
+                <a href="../pi/" title="Pi0.5">Next</a>
+            </nav>
+        </div>
+    </div>
+</footer>
+    </div>
+
+    
+    <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="alertdialog" aria-modal="true" aria-labelledby="searchModalLabel">
+    <div class="modal-dialog modal-lg" role="search">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="searchModalLabel">Search</h5>
+                <button type="button" class="close btn btn-default btn-ghost" data-dismiss="modal"><span aria-hidden="true">x</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+                <p id="searchInputLabel">Type to start searching</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" aria-labelledby="searchInputLabel" placeholder="" id="mkdocs-search-query" title="Please enter search terms here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No document matches found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+    
+    
+</body>
+
+</html>

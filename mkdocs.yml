@@ -1,1 +1,36 @@
-site_name: My Docs
+site_name: Research for Trossen MobileAI
+site_url: https://lajazz23.github.io/trossen_research/
+repo_url: https://github.com/lajazz23/trossen_research
+site_author: lajazz23
+
+theme:
+  name: terminal
+  palette: dark
+  highlightjs: true
+  hljs_languages:
+    - yaml
+    - rust
+  features:
+    - navigation.top.cursor_animation.hide
+    - revision.date
+    - navigation.side.indexes
+    - footer.prev_next
+    
+nav:
+  - Home: 'index.md'
+  - GitHub: https://github.com/lajazz23/trossen_research
+  - Robotics::
+      - Sensors, Actuators, and Control in Robotics: 'sensors.md'
+      - Imitation Learning: 'imitation.md'
+      - Foundation Models: 'foundation.md'
+      - Embodied AI: 'embodied.md'
+  - Trossen::
+      - Trossen MobileAI: 'trossen.md'
+  - Pre-trained Policies ::
+      - GR00T-N1/1.5: 'groot.md'
+      - Pi0.5: 'pi.md'
+      - RT-1: 'rt.md'
+      - CLAW: 'claw.md'
+
+extra_css:
+  - overrides/extra.css

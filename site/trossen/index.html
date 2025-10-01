@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="generator" content="mkdocs-1.6.1, mkdocs-terminal-4.7.0">
+     
+    
+    <meta name="author" content="lajazz23"> 
+    
+    <link rel="canonical" href="https://lajazz23.github.io/trossen_research/trossen/"><link rel="icon" type="image/png" sizes="192x192" href="../img/android-chrome-192x192.png" />
+<link rel="icon" type="image/png" sizes="512x512" href="../img/android-chrome-512x512.png" />
+<link rel="apple-touch-icon" sizes="180x180" href="../img/apple-touch-icon.png" />
+<link rel="shortcut icon" type="image/png" sizes="48x48" href="../img/favicon.ico" />
+<link rel="icon" type="image/png" sizes="16x16" href="../img/favicon-16x16.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="../img/favicon-32x32.png" />
+
+
+    
+ 
+<title>Trossen MobileAI - Research for Trossen MobileAI</title>
+
+
+<link href="../css/fontawesome/css/fontawesome.min.css" rel="stylesheet">
+<link href="../css/fontawesome/css/solid.min.css" rel="stylesheet">
+<link href="../css/normalize.css" rel="stylesheet">
+<link href="../css/terminal.css" rel="stylesheet">
+<link href="../css/theme.css" rel="stylesheet">
+<link href="../css/theme.tile_grid.css" rel="stylesheet">
+<link href="../css/theme.footer.css" rel="stylesheet">
+<!-- dark color palette -->
+<link href="../css/palettes/dark.css" rel="stylesheet">
+
+<!-- page layout -->
+<style>
+/* initially set page layout to a one column grid */
+.terminal-mkdocs-main-grid {
+    display: grid;
+    grid-column-gap: 1.4em;
+    grid-template-columns: auto;
+    grid-template-rows: auto;
+}
+
+/*  
+*   when side navigation is not hidden, use a two column grid.  
+*   if the screen is too narrow, fall back to the initial one column grid layout.
+*   in this case the main content will be placed under the navigation panel. 
+*/
+@media only screen and (min-width: 70em) {
+    .terminal-mkdocs-main-grid {
+        grid-template-columns: 4fr 9fr;
+    }
+}</style>
+
+<!-- cursor_animation override -->
+<style>
+  #mkdocs-terminal-site-name.terminal-prompt::after {
+      display: none;
+  }
+</style>
+
+    
+    <link href="../overrides/extra.css" rel="stylesheet">  
+    
+    
+
+    
+    <!-- search css support -->
+<link href="../css/search/bootstrap-modal.css" rel="stylesheet">
+<!-- search scripts -->
+<script>
+    var base_url = "..",
+    shortcuts = "{}";
+</script>
+<script src="../js/jquery/jquery-1.10.1.min.js" defer></script>
+<script src="../js/bootstrap/bootstrap.min.js" defer></script>
+<script src="../js/mkdocs/base.js" defer></script>
+    
+    
+    
+    
+    <script src="../search/main.js"></script>
+    
+
+    
+</head>
+
+<body class="terminal"><div class="container">
+    <div class="terminal-nav">
+        <header class="terminal-logo">
+            <div id="mkdocs-terminal-site-name" class="logo terminal-prompt"><a href="https://lajazz23.github.io/trossen_research/" class="no-style">Research for Trossen MobileAI</a></div>
+        </header>
+        
+        <nav class="terminal-menu">
+            
+            <ul vocab="https://schema.org/" typeof="BreadcrumbList">
+                
+                
+                <li property="itemListElement" typeof="ListItem">
+                    <a href=".." class="menu-item " property="item" typeof="WebPage">
+                        <span property="name">Home</span>
+                    </a>
+                    <meta property="position" content="0">
+                </li>
+                
+                
+                <li property="itemListElement" typeof="ListItem">
+                    <a href="https://github.com/lajazz23/trossen_research" class="menu-item " property="item" typeof="WebPage">
+                        <span property="name">GitHub</span>
+                    </a>
+                    <meta property="position" content="1">
+                </li>
+                
+                
+                
+                
+                
+                
+                
+                    
+                    
+
+
+<li property="itemListElement" typeof="ListItem">
+    <a href="#" class="menu-item" data-toggle="modal" data-target="#mkdocs_search_modal" property="item" typeof="SearchAction">
+        <i aria-hidden="true" class="fa fa-search"></i> <span property="name">Search</span>
+    </a>
+    <meta property="position" content="2">
+</li>
+                    
+            </ul>
+            
+        </nav>
+    </div>
+</div>
+        
+    <div class="container">
+        <div class="terminal-mkdocs-main-grid"><aside id="terminal-mkdocs-side-panel"><nav>
+  
+    <ul class="terminal-mkdocs-side-nav-items">
+        
+          
+
+
+
+<li class="terminal-mkdocs-side-nav-li">
+    
+    
+    
+        
+        
+            <a class="
+
+    terminal-mkdocs-side-nav-item" href="..">Home</a>
+        
+    
+    
+    
+  </li>
+        
+          
+
+
+
+<li class="terminal-mkdocs-side-nav-li">
+    
+    
+    
+        
+        
+            <a class="
+
+    terminal-mkdocs-side-nav-item" href="https://github.com/lajazz23/trossen_research">GitHub</a>
+        
+    
+    
+    
+  </li>
+        
+          
+
+
+
+<li class="terminal-mkdocs-side-nav-li">
+    
+    
+        
+        
+            
+                
+        
+
+        
+            
+    
+        
+        
+            
+            
+            <span class="
+        
+            
+        
+    
+
+    terminal-mkdocs-side-nav-item terminal-mkdocs-side-nav-section-no-index">Robotics:</span>
+        
+    
+    
+        
+      
+        
+            <ul class="terminal-mkdocs-side-nav-li-ul">
+        
+            
+            
+                
+                
+            
+
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="
+
+    terminal-mkdocs-side-nav-item" href="../sensors/">Sensors, Actuators, and Control in Robotics</a>
+        
+    
+    </li>
+            
+        
+            
+            
+                
+                
+            
+
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="
+
+    terminal-mkdocs-side-nav-item" href="../imitation/">Imitation Learning</a>
+        
+    
+    </li>
+            
+        
+            
+            
+                
+                
+            
+
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="
+
+    terminal-mkdocs-side-nav-item" href="../foundation/">Foundation Models</a>
+        
+    
+    </li>
+            
+        
+            
+            
+                
+                
+            
+
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="
+
+    terminal-mkdocs-side-nav-item" href="../embodied/">Embodied AI</a>
+        
+    
+    </li>
+            
+            
+    </ul>
+        
+    
+  </li>
+        
+          
+
+
+
+<li class="terminal-mkdocs-side-nav-li">
+    
+    
+        
+        
+            
+                
+        
+
+        
+            
+    
+        
+        <span class="
+        
+            
+        
+    
+
+    terminal-mkdocs-side-nav-item--active terminal-mkdocs-side-nav-section-no-index">Trossen:</span>
+    
+    
+        
+      
+        
+            <ul class="terminal-mkdocs-side-nav-li-ul">
+        
+            
+            
+                
+                
+            
+
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        <span class="
+
+    terminal-mkdocs-side-nav-item--active">Trossen MobileAI</span>
+    
+    </li>
+            
+            
+    </ul>
+        
+    
+  </li>
+        
+          
+
+
+
+<li class="terminal-mkdocs-side-nav-li">
+    
+    
+        
+        
+            
+                
+        
+
+        
+            
+    
+        
+        
+            
+            
+            <span class="
+        
+            
+        
+    
+
+    terminal-mkdocs-side-nav-item terminal-mkdocs-side-nav-section-no-index">Pre-trained Policies :</span>
+        
+    
+    
+        
+      
+        
+            <ul class="terminal-mkdocs-side-nav-li-ul">
+        
+            
+            
+                
+                
+            
+
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="
+
+    terminal-mkdocs-side-nav-item" href="../groot/">GR00T-N1/1.5</a>
+        
+    
+    </li>
+            
+        
+            
+            
+                
+                
+            
+
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="
+
+    terminal-mkdocs-side-nav-item" href="../pi/">Pi0.5</a>
+        
+    
+    </li>
+            
+        
+            
+            
+                
+                
+            
+
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="
+
+    terminal-mkdocs-side-nav-item" href="../rt/">RT-1</a>
+        
+    
+    </li>
+            
+        
+            
+            
+                
+                
+            
+
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="
+
+    terminal-mkdocs-side-nav-item" href="../claw/">CLAW</a>
+        
+    
+    </li>
+            
+            
+    </ul>
+        
+    
+  </li>
+        
+    </ul>
+  
+</nav><hr>
+<nav>
+    <ul>
+        <li><a href="#trossen-mobileai-robot-operating-system-ros">Trossen MobileAI &amp; Robot Operating System (ROS)</a></li>
+        <li><a href="#training-simulation">Training &amp; Simulation</a></li><li><a href="#robot-operating-system-ros">Robot Operating System (ROS)</a></li>
+    </ul>
+</nav>
+</aside>
+            <main id="terminal-mkdocs-main-content">
+<section id="mkdocs-terminal-content">
+    <h1 id="trossen-mobileai-robot-operating-system-ros">Trossen MobileAI &amp; Robot Operating System (ROS)</h1>
+<h2 id="training-simulation">Training &amp; Simulation</h2>
+<ul>
+<li>Data is collected via <strong>teleoperation</strong> and <strong>imitation learning</strong>.  </li>
+<li><strong>LeRobot</strong> is used to collect episodes from physical runs or simulation.  </li>
+</ul>
+<h3 id="lerobot-details">LeRobot Details</h3>
+<p><a href="https://www.youtube.com/watch?v=yi9wdm9e53Y">Tutorial Video</a></p>
+<ul>
+<li>Each arm has its own <strong>IP address</strong> to connect to the computer.  </li>
+<li>Arms have <strong>predefined ranges of motion</strong>.  </li>
+<li>Default camera is <strong>Intel RealSense</strong>, but <strong>OpenCV cameras</strong> can also be used.  </li>
+<li>Match the camera to the correct index and update the configuration.  </li>
+<li>Note: RealSense cameras may encounter <strong>USB bandwidth issues</strong>.  </li>
+<li>You may <strong>record and upload datasets</strong> to platforms like HuggingFace.  </li>
+<li>Episodes can be watched <strong>remotely</strong> or <strong>locally</strong> (follower arm mimics your movement).  </li>
+</ul>
+<h3 id="training-evaluation">Training &amp; Evaluation</h3>
+<ul>
+<li>The robot tries to <strong>mimic the training data</strong> you recorded.  </li>
+<li><strong>Checkpoints</strong> are automatically saved.  </li>
+</ul>
+<h3 id="simulation-details-without-hardware">Simulation Details (without hardware)</h3>
+<ul>
+<li><strong>MuJoCo window</strong> displays the simulation.  </li>
+<li><strong>End-effector control</strong>: moves the robot based on scripted end-effector movements.  </li>
+<li><strong>Joint-level control</strong>: moves the robot based on controllers.  </li>
+<li><strong>Two-stage pipeline</strong>:  <ol>
+<li>Runs a scripted policy in the environment  </li>
+<li>Joint trajectories are replayed  </li>
+</ol>
+</li>
+<li>You can define the <strong>environment</strong>, <strong>data logs</strong>, and <strong>rewards</strong> yourself.  </li>
+<li>
+<p><strong>Motion logic</strong> includes trajectories that define:  </p>
+<ul>
+<li>Time  </li>
+<li>3D position  </li>
+<li>Orientation  </li>
+<li>Gripper value  </li>
+</ul>
+</li>
+<li>
+<p><strong>Interbotix drivers</strong> interface between high-level commands and low-level actions.  </p>
+</li>
+<li><strong>State observations</strong> are made using <strong>Intel RealSense RGB-D cameras</strong> (image and depth).  </li>
+<li>Configuration includes serial numbers and IP addresses.  </li>
+<li><strong>Actions</strong> are output by a high-level policy:  </li>
+<li>In MuJoCo:  <ul>
+<li><strong>End-effector control</strong>: control the gripper pose  </li>
+<li><strong>Joint-level control</strong>: control each joint individually  </li>
+</ul>
+</li>
+<li>The driver (Interbotix) translates commands into motor actions, compensates for gravity, ensures safety, and manages low-level protocols.  </li>
+</ul>
+<hr />
+<h2 id="robot-operating-system-ros">Robot Operating System (ROS)</h2>
+<p><strong>Repository:</strong> <a href="https://github.com/Interbotix/interbotix_ros_core">Interbotix ROS Core</a>  </p>
+<h3 id="interbotix-research-robotics-open-standard-irros-layers">Interbotix Research Robotics Open Standard (IRROS) Layers</h3>
+<p><strong>1. Hardware Layer</strong><br />
+    - Defines actuators and sensors in the robot<br />
+    - Includes actuator interface, controllers, drivers, and motors  </p>
+<p><strong>2. Driver Layer</strong><br />
+    - Contains ROS wrappers to obtain data from sensors and actuators<br />
+    - Repository resides in this layer  </p>
+<p><strong>3. Control Layer</strong><br />
+    - ROS packages for all Interbotix robot configurations<br />
+    - Define parameters for actuators &amp; sensors and manage launch files  </p>
+<p><strong>4. Application Support Layer</strong><br />
+    - Makes working with the robot easier  </p>
+<p><strong>5. Research Layer</strong><br />
+    - User-supplied custom code  </p>
+<hr />
+<h3 id="ros-functionality">ROS Functionality</h3>
+<ul>
+<li>Links hardware with software using <strong>nodes</strong>.  <ul>
+<li>Each node can serve a purpose: data collection, reasoning, output.  </li>
+</ul>
+</li>
+<li>ROS drivers and wrappers allow working with <strong>high-level details</strong> while covering actuator specifics.  </li>
+</ul>
+<h3 id="ros-versions">ROS Versions</h3>
+<h4 id="ros-1-noetic">ROS 1 (Noetic)</h4>
+<ul>
+<li>Uses a <strong>master node</strong> to manage all other nodes  </li>
+<li>Good for research; can run on multiple robots with custom networking or ROS namespaces  </li>
+<li>Many supporting resources, but considered <strong>legacy</strong>  </li>
+</ul>
+<h4 id="ros-2-galactic-humble-rolling">ROS 2 (Galactic, Humble, Rolling)</h4>
+<ul>
+<li>Uses <strong>DDS (Data Distribution Service)</strong>; no central master node  </li>
+<li>Suitable for <strong>real-time robotics</strong> and multi-robot communication  </li>
+<li>More modern and actively updated  </li>
+</ul>
+<hr />
+<p>Made by Jasmin Lin.</p>
+</section>
+
+            </main>
+        </div>
+        <hr><footer>
+    <div class="terminal-mkdocs-footer-grid">
+        <div id="terminal-mkdocs-footer-copyright-info">
+             Site built with <a href="http://www.mkdocs.org">MkDocs</a> and <a href="https://github.com/ntno/mkdocs-terminal">Terminal for MkDocs</a>.
+        </div>
+        <div id="terminal-mkdocs-footer-prev-next">
+            <nav class="btn-group">
+                <a href="../embodied/" title="Embodied AI">Previous</a>
+                |
+                <a href="../groot/" title="GR00T-N1/1.5">Next</a>
+            </nav>
+        </div>
+    </div>
+</footer>
+    </div>
+
+    
+    <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="alertdialog" aria-modal="true" aria-labelledby="searchModalLabel">
+    <div class="modal-dialog modal-lg" role="search">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="searchModalLabel">Search</h5>
+                <button type="button" class="close btn btn-default btn-ghost" data-dismiss="modal"><span aria-hidden="true">x</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+                <p id="searchInputLabel">Type to start searching</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" aria-labelledby="searchInputLabel" placeholder="" id="mkdocs-search-query" title="Please enter search terms here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No document matches found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+    
+    
+</body>
+
+</html>
