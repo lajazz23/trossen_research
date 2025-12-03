@@ -602,28 +602,20 @@ python scripts/inference_service.py --model-path nvidia/GR00T-N1.5-3B --server -
 # You will have to also point the client to the adjusted port
 python scripts/inference_service.py --client --port &lt;port&gt;
 
-
-
-**Error:**
-
 </code></pre>
-<p>RuntimeError: Server error: CUDA error: no kernel image is available for execution on the device</p>
-<pre><code>
-**Solution:**
-Download pre-built flash-attn wheels: https://github.com/Zarrac/flashattention-blackwell-wheels-whl-ONLY-5090-5080-5070-5060-flash-attention-/releases/tag/FlashAttention
-
-**Error:**
-
+<p><strong>Error:</strong></p>
+<pre><code>RuntimeError: Server error: CUDA error: no kernel image is available for execution on the device
 </code></pre>
-<p>raise ImportError("torchcodec is not available.")
-ImportError: torchcodec is not available.</p>
-<pre><code>
-**Solution:**
-My issue was that torchdec was not compatible with my PyTorch version.
-
+<p><strong>Solution:</strong>
+Download pre-built flash-attn wheels: https://github.com/Zarrac/flashattention-blackwell-wheels-whl-ONLY-5090-5080-5070-5060-flash-attention-/releases/tag/FlashAttention</p>
+<p><strong>Error:</strong></p>
+<pre><code>raise ImportError(&quot;torchcodec is not available.&quot;)
+ImportError: torchcodec is not available.
 </code></pre>
-<p>pip install torchcodec==0.5.0
-```</p>
+<p><strong>Solution:</strong>
+My issue was that torchdec was not compatible with my PyTorch version.</p>
+<pre><code>pip install torchcodec==0.5.0
+</code></pre>
 <hr />
 <p>Made by Jasmin Lin.</p>
 </section>
