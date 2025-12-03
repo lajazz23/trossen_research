@@ -560,6 +560,19 @@ pip install --no-build-isolation &quot;git+https://github.com/facebookresearch/p
 pip install -e .[base] --no-deps
 pip install --no-build-isolation flash-attn
 </code></pre>
+<h3 id="troubleshooting">Troubleshooting</h3>
+<p>Error: <strong>raise InvalidSchemaError from e
+pydantic._internal._generate_schema.InvalidSchemaError</strong>
+Solution: Ensure <code>NumPy</code> is compatabile with <code>numpydantic</code> and <code>Pydantic</code>. I did the following because I had NumPy v1.26.4.</p>
+<pre><code># first check your NumPy version
+python -c &quot;import numpy; print(numpy.__version__)&quot;
+
+pip install pydantic
+pip install --upgrade numpydantic
+cd ~/IsaacGR00T 
+pip install -e .[base] --no-deps
+
+</code></pre>
 <hr />
 <p>Made by Jasmin Lin.</p>
 </section>
