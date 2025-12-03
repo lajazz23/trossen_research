@@ -579,13 +579,17 @@ pip install -e .[base] --no-deps</p>
 ## Starting Their Demos
 
 They begin with the quick start, where you can download their model checkpoint and run inference via client-server.
+
 </code></pre>
 <p>python scripts/inference_service.py --model-path nvidia/GR00T-N1.5-3B --server</p>
-<pre><code>Open another terminal and start the client. This pulls the model's response (action) from the server after giving it an observation.
+<pre><code>
+Open another terminal and start the client. This pulls the model's response (action) from the server after giving it an observation.
+
 </code></pre>
 <p>python scripts/inference_service.py  --client</p>
 <pre><code>
 Next, run the script to load this dataset, which will start a pop-up showing the frames.
+
 </code></pre>
 <p>python scripts/load_dataset.py --dataset-path ./demo_data/robot_sim.PickNPlace</p>
 <pre><code>
@@ -606,14 +610,12 @@ python scripts/inference_service.py --client --port &lt;port&gt;
 <p><strong>Error:</strong></p>
 <pre><code>RuntimeError: Server error: CUDA error: no kernel image is available for execution on the device
 </code></pre>
-<p><strong>Solution:</strong>
-Download pre-built flash-attn wheels: https://github.com/Zarrac/flashattention-blackwell-wheels-whl-ONLY-5090-5080-5070-5060-flash-attention-/releases/tag/FlashAttention</p>
+<p><strong>Solution:</strong> Download pre-built flash-attn wheels: https://github.com/Zarrac/flashattention-blackwell-wheels-whl-ONLY-5090-5080-5070-5060-flash-attention-/releases/tag/FlashAttention</p>
 <p><strong>Error:</strong></p>
 <pre><code>raise ImportError(&quot;torchcodec is not available.&quot;)
 ImportError: torchcodec is not available.
 </code></pre>
-<p><strong>Solution:</strong>
-My issue was that torchdec was not compatible with my PyTorch version.</p>
+<p><strong>Solution:</strong> My issue was that torchdec was not compatible with my PyTorch version.</p>
 <pre><code>pip install torchcodec==0.5.0
 </code></pre>
 <hr />
