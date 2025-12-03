@@ -531,7 +531,8 @@
 <nav>
     <ul>
         <li><a href="#setup-for-gr00t-n15">Setup for GR00T-N1.5</a></li>
-        <li><a href="#installing-the-repo">Installing the repo</a></li><li><a href="#starting-their-demos">Starting Their Demos</a></li>
+        <li><a href="#installing-the-repo">Installing the repo</a></li><li><a href="#first-check-your-numpy-version">first check your NumPy version</a></li>
+        
     </ul>
 </nav>
 </aside>
@@ -561,29 +562,36 @@ pip install -e .[base] --no-deps
 pip install --no-build-isolation flash-attn
 </code></pre>
 <h3 id="troubleshooting">Troubleshooting</h3>
-<p>Error: <strong>raise InvalidSchemaError from e</strong>
-      <strong>pydantic._internal._generate_schema.InvalidSchemaError</strong>
-Solution: Ensure <code>NumPy</code> is compatabile with <code>numpydantic</code> and <code>Pydantic</code>. I did the following because I had NumPy v1.26.4.</p>
-<pre><code># first check your NumPy version
-python -c &quot;import numpy; print(numpy.__version__)&quot;
+<p><strong>Error:</strong> 
+```raise InvalidSchemaError from e
+pydantic._internal._generate_schema.InvalidSchemaError</p>
+<pre><code>**Solution:** Ensure `NumPy` is compatabile with `numpydantic` and `Pydantic`. I did the following because I had NumPy v1.26.4.
 
-pip install pydantic
+</code></pre>
+<h1 id="first-check-your-numpy-version">first check your NumPy version</h1>
+<p>python -c "import numpy; print(numpy.<strong>version</strong>)"</p>
+<p>pip install pydantic
 pip install --upgrade numpydantic
 cd ~/IsaacGR00T 
-pip install -e .[base] --no-deps
+pip install -e .[base] --no-deps</p>
+<pre><code>
+## Starting Their Demos
+
+They begin with the quick start, where you can download their model checkpoint and run inference via client-server.
 </code></pre>
-<h2 id="starting-their-demos">Starting Their Demos</h2>
-<p>They begin with the quick start, where you can download their model checkpoint and run inference via client-server.</p>
-<pre><code>python scripts/inference_service.py --model-path nvidia/GR00T-N1.5-3B --server
+<p>python scripts/inference_service.py --model-path nvidia/GR00T-N1.5-3B --server</p>
+<pre><code>Open another terminal and start the client. This pulls the model's response (action) from the server after giving it an observation.
 </code></pre>
-<p>Open another terminal and start the client. This pulls the model's response (action) from the server after giving it an observation.</p>
-<pre><code>python scripts/inference_service.py  --client
+<p>python scripts/inference_service.py  --client</p>
+<pre><code>
+### Troubleshooting
+**Error:**
 </code></pre>
-<h3 id="troubleshooting_1">Troubleshooting</h3>
-<p>Error: <strong>zmq.error.ZMQError: Address already in use (addr='tcp://*:5555')</strong>
-Solution: Use another port.</p>
-<pre><code>python scripts/inference_service.py --model-path nvidia/GR00T-N1.5-3B --server --port 5556
+<p>zmq.error.ZMQError: Address already in use (addr='tcp://*:5555')</p>
+<pre><code>**Solution:** Use another port.
 </code></pre>
+<p>python scripts/inference_service.py --model-path nvidia/GR00T-N1.5-3B --server --port 5556
+```</p>
 <hr />
 <p>Made by Jasmin Lin.</p>
 </section>
