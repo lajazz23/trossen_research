@@ -10,7 +10,7 @@
     
     <meta name="author" content="lajazz23"> 
     
-    <link rel="canonical" href="https://lajazz23.github.io/trossen_research/claw/"><link rel="icon" type="image/png" sizes="192x192" href="../img/android-chrome-192x192.png" />
+    <link rel="canonical" href="https://lajazz23.github.io/trossen_research/setup/"><link rel="icon" type="image/png" sizes="192x192" href="../img/android-chrome-192x192.png" />
 <link rel="icon" type="image/png" sizes="512x512" href="../img/android-chrome-512x512.png" />
 <link rel="apple-touch-icon" sizes="180x180" href="../img/apple-touch-icon.png" />
 <link rel="shortcut icon" type="image/png" sizes="48x48" href="../img/favicon.ico" />
@@ -20,7 +20,7 @@
 
     
  
-<title>CLAW - Research for Trossen MobileAI</title>
+<title>Setup for Code - Research for Trossen MobileAI</title>
 
 
 <link href="../css/fontawesome/css/fontawesome.min.css" rel="stylesheet">
@@ -371,13 +371,17 @@
             
     
         
-        <span class="
+        
+            
+            
+            <span class="
         
             
         
     
 
-    terminal-mkdocs-side-nav-item--active terminal-mkdocs-side-nav-section-no-index">Pre-trained Policies :</span>
+    terminal-mkdocs-side-nav-item terminal-mkdocs-side-nav-section-no-index">Pre-trained Policies :</span>
+        
     
     
         
@@ -452,9 +456,11 @@
                 <li class="terminal-mkdocs-side-nav-li-ul-li">
     
         
-        <span class="
+        
+            <a class="
 
-    terminal-mkdocs-side-nav-item--active">CLAW</span>
+    terminal-mkdocs-side-nav-item" href="../claw/">CLAW</a>
+        
     
     </li>
             
@@ -469,43 +475,36 @@
 </nav><hr>
 <nav>
     <ul>
-        <li><a href="#claw-clip-language-action-for-weight">CLAW (CLIP-Language-Action for Weight)</a></li>
-        <li><a href="#key-features">Key Features</a></li><li><a href="#motivation">Motivation</a></li><li><a href="#claw-pipeline">CLAW Pipeline</a></li>
+        <li><a href="#setup-for-code">Setup for Code</a></li>
+        <li><a href="#gr00t-n15">GR00T-N1.5</a></li>
     </ul>
 </nav>
 </aside>
             <main id="terminal-mkdocs-main-content">
 <section id="mkdocs-terminal-content">
-    <h1 id="claw-clip-language-action-for-weight">CLAW (CLIP-Language-Action for Weight)</h1>
-<p>CLAW is a weight-aware Vision-Language-Action (VLA) model that decouples condition evaluation from action generation.  </p>
-<hr />
-<h2 id="key-features">Key Features</h2>
-<ul>
-<li>Uses a condition-monitoring module to evaluate numeric task constraints (e.g., weight thresholds) for action output.  </li>
-<li>Combines CLIP and π0 for continuous visuomotor control:  </li>
-<li>CLIP converts numeric readings into symbolic language prompts, ideal for detecting when a weight threshold is reached.<br />
-        - Determines if the robot should grip harder or stop.  </li>
-<li>π0 produces continuous, high-frequency robot actions from multi-view observations.<br />
-        - Maps observations + language input into continuous motor commands.  </li>
-<li>Together:<br />
-        - CLIP labels the task ("grip" or "no grip")<br />
-        - Passes this prompt to π0<br />
-        - π0 is fine-tuned using flow-matching loss conditioned on the prompts  </li>
-</ul>
-<hr />
-<h2 id="motivation">Motivation</h2>
-<ul>
-<li>Standard VLAs often struggle with precise execution, particularly for manipulation tasks like picking up objects.  </li>
-<li>CLAW addresses this by integrating weight awareness into the decision-making process.  </li>
-</ul>
-<hr />
-<h2 id="claw-pipeline">CLAW Pipeline</h2>
-<ol>
-<li>Language Input  </li>
-<li>CLIP monitors the scale → outputs “stop” or “continue” based on weight threshold  </li>
-<li>π0 generates continuous robot actions using the CLIP prompt + multi-view images  </li>
-<li>Loop continues until the target weight is reached  </li>
-</ol>
+    <h1 id="setup-for-code">Setup for Code</h1>
+<h2 id="gr00t-n15">GR00T-N1.5</h2>
+<p>First, clone the repository.</p>
+<pre><code>git clone https://github.com/NVIDIA/Isaac-GR00T
+cd Isaac-GR00T
+</code></pre>
+<p>Then create a conda environment for it.</p>
+<pre><code>conda create -n gr00t python=3.10
+conda activate gr00t
+</code></pre>
+<p>I installed the nightly build of PyTorch for CUDA 12.8, because my workstation gpu architecture is sm120. </p>
+<pre><code>pip3 install --pre torch torchvision --index-url https://download.pytorch.org/whl/nightly/cu128
+
+</code></pre>
+<p>Then I install pytorch3d next.</p>
+<pre><code>export TORCH_CUDA_ARCH_LIST=&quot;12.0&quot;
+pip install --no-build-isolation &quot;git+https://github.com/facebookresearch/pytorch3d.git&quot;
+</code></pre>
+<p>The rest of the dependencies follow.</p>
+<pre><code>pip install --upgrade setuptools
+pip install -e .[base] --no-deps
+pip install --no-build-isolation flash-attn
+</code></pre>
 <hr />
 <p>Made by Jasmin Lin.</p>
 </section>
@@ -516,12 +515,6 @@
     <div class="terminal-mkdocs-footer-grid">
         <div id="terminal-mkdocs-footer-copyright-info">
              Site built with <a href="http://www.mkdocs.org">MkDocs</a> and <a href="https://github.com/ntno/mkdocs-terminal">Terminal for MkDocs</a>.
-        </div>
-        <div id="terminal-mkdocs-footer-prev-next">
-            <nav class="btn-group">
-                <a href="../rt/" title="RT-1">Previous</a>
-                
-            </nav>
         </div>
     </div>
 </footer>
