@@ -532,7 +532,6 @@
     <ul>
         <li><a href="#setup-for-gr00t-n15">Setup for GR00T-N1.5</a></li>
         <li><a href="#installing-the-repo">Installing the repo</a></li><li><a href="#first-check-your-numpy-version">first check your NumPy version</a></li>
-        <li><a href="#you-will-have-to-also-point-the-client-to-the-adjusted-port">you will have to also point the client to the adjusted port</a></li>
         
     </ul>
 </nav>
@@ -597,11 +596,14 @@ Next, run the script to load this dataset, which will start a pop-up showing the
 <p>zmq.error.ZMQError: Address already in use (addr='tcp://*:<port>')</p>
 <pre><code>**Solution:** Use another port.
 
-</code></pre>
-<p>python scripts/inference_service.py --model-path nvidia/GR00T-N1.5-3B --server --port <port></p>
-<h1 id="you-will-have-to-also-point-the-client-to-the-adjusted-port">you will have to also point the client to the adjusted port</h1>
-<p>python scripts/inference_service.py --client --port <port></p>
-<pre><code>
+```python
+python scripts/inference_service.py --model-path nvidia/GR00T-N1.5-3B --server --port &lt;port&gt;
+
+# You will have to also point the client to the adjusted port
+python scripts/inference_service.py --client --port &lt;port&gt;
+
+
+
 **Error:**
 
 </code></pre>
