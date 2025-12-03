@@ -563,8 +563,8 @@ pip install -e .[base] --no-deps
 pip install --no-build-isolation flash-attn
 </code></pre>
 <h3 id="troubleshooting">Troubleshooting</h3>
-<p><strong>Error:</strong> 
-```raise InvalidSchemaError from e
+<p><strong>Error:</strong> </p>
+<p>```raise InvalidSchemaError from e
 pydantic._internal._generate_schema.InvalidSchemaError</p>
 <pre><code>
 **Solution:** Ensure `NumPy` is compatabile with `numpydantic` and `Pydantic`. I did the following because I had NumPy v1.26.4.
@@ -586,12 +586,15 @@ They begin with the quick start, where you can download their model checkpoint a
 </code></pre>
 <p>python scripts/inference_service.py  --client</p>
 <pre><code>
-
+Next, run the script to load this dataset, which will start a pop-up showing the frames.
+</code></pre>
+<p>python scripts/load_dataset.py --dataset-path ./demo_data/robot_sim.PickNPlace</p>
+<pre><code>
 ### Troubleshooting
 **Error:**
 
 </code></pre>
-<p>zmq.error.ZMQError: Address already in use (addr='tcp://*:5555')</p>
+<p>zmq.error.ZMQError: Address already in use (addr='tcp://*:<port>')</p>
 <pre><code>**Solution:** Use another port.
 
 </code></pre>
@@ -605,9 +608,20 @@ They begin with the quick start, where you can download their model checkpoint a
 <p>RuntimeError: Server error: CUDA error: no kernel image is available for execution on the device</p>
 <pre><code>
 **Solution:**
+Download pre-built flash-attn wheels: https://github.com/Zarrac/flashattention-blackwell-wheels-whl-ONLY-5090-5080-5070-5060-flash-attention-/releases/tag/FlashAttention
+
+**Error:**
 
 </code></pre>
-<p>```</p>
+<p>raise ImportError("torchcodec is not available.")
+ImportError: torchcodec is not available.</p>
+<pre><code>
+**Solution:**
+My issue was that torchdec was not compatible with my PyTorch version.
+
+</code></pre>
+<p>pip install torchcodec==0.5.0
+```</p>
 <hr />
 <p>Made by Jasmin Lin.</p>
 </section>
