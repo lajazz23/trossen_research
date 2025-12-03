@@ -532,6 +532,7 @@
     <ul>
         <li><a href="#setup-for-gr00t-n15">Setup for GR00T-N1.5</a></li>
         <li><a href="#installing-the-repo">Installing the repo</a></li><li><a href="#first-check-your-numpy-version">first check your NumPy version</a></li>
+        <li><a href="#you-will-have-to-also-point-the-client-to-the-adjusted-port">you will have to also point the client to the adjusted port</a></li>
         
     </ul>
 </nav>
@@ -565,7 +566,8 @@ pip install --no-build-isolation flash-attn
 <p><strong>Error:</strong> 
 ```raise InvalidSchemaError from e
 pydantic._internal._generate_schema.InvalidSchemaError</p>
-<pre><code>**Solution:** Ensure `NumPy` is compatabile with `numpydantic` and `Pydantic`. I did the following because I had NumPy v1.26.4.
+<pre><code>
+**Solution:** Ensure `NumPy` is compatabile with `numpydantic` and `Pydantic`. I did the following because I had NumPy v1.26.4.
 
 </code></pre>
 <h1 id="first-check-your-numpy-version">first check your NumPy version</h1>
@@ -584,14 +586,28 @@ They begin with the quick start, where you can download their model checkpoint a
 </code></pre>
 <p>python scripts/inference_service.py  --client</p>
 <pre><code>
+
 ### Troubleshooting
 **Error:**
+
 </code></pre>
 <p>zmq.error.ZMQError: Address already in use (addr='tcp://*:5555')</p>
 <pre><code>**Solution:** Use another port.
+
 </code></pre>
-<p>python scripts/inference_service.py --model-path nvidia/GR00T-N1.5-3B --server --port 5556
-```</p>
+<p>python scripts/inference_service.py --model-path nvidia/GR00T-N1.5-3B --server --port <port></p>
+<h1 id="you-will-have-to-also-point-the-client-to-the-adjusted-port">you will have to also point the client to the adjusted port</h1>
+<p>python scripts/inference_service.py --client --port <port></p>
+<pre><code>
+**Error:**
+
+</code></pre>
+<p>RuntimeError: Server error: CUDA error: no kernel image is available for execution on the device</p>
+<pre><code>
+**Solution:**
+
+</code></pre>
+<p>```</p>
 <hr />
 <p>Made by Jasmin Lin.</p>
 </section>
