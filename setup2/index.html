@@ -592,9 +592,49 @@ observation.images.cam_high
 observation.images.cam_left_wrist
 observation.images.cam_right_wrist
 </code></pre>
+<p>Now here's a problem--like most of the VLAs I've worked with, GR00T-N1.5 has a specific way to read the data, and unfortunately, our dataset isn't fully readable by it yet.</p>
+<p>Here are the changes I've done:</p>
+<ol>
+<li>Add a custom config file for the Trossen MobileAI robot to the <a href="https://github.com/lajazz23/MobileAI-GR00TN1.5/blob/main/gr00t/experiment/data_config.py">data_config.py</a> file.<ul>
+<li>As shown above, the cameras are conventially named "observation.images...", but it must be changed.</li>
+<li>I removed all instances of that, so that only "cam_..." was left. This includes renaming the video folders in the dataset. </li>
+</ul>
+</li>
+<li>Added a <code>modality.json</code> file to the <code>dataset/meta</code> folder from our dataset. Something like this:</li>
+</ol>
+<pre><code>{
+  &quot;video&quot;: {
+    &quot;cam_high&quot;: { &quot;type&quot;: &quot;rgb&quot;, &quot;description&quot;: &quot;High camera video stream&quot; },
+    &quot;cam_left_wrist&quot;: { &quot;type&quot;: &quot;rgb&quot;, &quot;description&quot;: &quot;Left wrist video stream&quot; },
+    &quot;cam_right_wrist&quot;: { &quot;type&quot;: &quot;rgb&quot;, &quot;description&quot;: &quot;Right wrist video stream&quot; }
+  },
+  &quot;state&quot;: {
+    &quot;observation&quot;: {
+      &quot;shape&quot;: [19],
+      &quot;dtype&quot;: &quot;float32&quot;,
+      &quot;start&quot;: 0,
+      &quot;end&quot;: 19,
+      &quot;description&quot;: &quot;Robot odom + velocity + left and right joint positions&quot;
+    }
+  },
+  &quot;action&quot;: {
+    &quot;action&quot;: {
+      &quot;shape&quot;: [16],
+      &quot;dtype&quot;: &quot;float32&quot;,
+      &quot;start&quot;: 0,
+      &quot;end&quot;: 16,
+      &quot;description&quot;: &quot;Mobile base velocity + left/right arm joints&quot;
+    }
+  },
+  &quot;language&quot;: {}
+}
+</code></pre>
+<ol>
+<li></li>
+</ol>
 <h3 id="troubleshooting">Troubleshooting</h3>
-<p><strong>Error:</strong> Not enought memory (dependent on size of dataset).
-<strong>Solution:</strong> Change the batch size in <code>Isaac-GR00T/scripts/gr00t_finetune.py</code> to a smaller number.</p>
+<p><strong>Error:</strong> Not enought memory (dependent on size of dataset).</p>
+<p><strong>Solution:</strong> Change the batch size in <code>Isaac-GR00T/scripts/gr00t_finetune.py</code> to a smaller number.</p>
 </section>
 
             </main>
