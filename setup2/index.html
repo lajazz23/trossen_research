@@ -545,6 +545,40 @@
 <section id="mkdocs-terminal-content">
     <h1 id="setup-for-incorporating-gr00t-n15-with-trossen-mobileai">Setup for Incorporating GR00T-N1.5 with Trossen MobileAI</h1>
 <p>GR00T-N1.5 does not have pre-defined configs for robots like the Trossen MobileAI, where it is not a full humanoid yet it has bimanual arms that have end-effector control. Thus, we will have to customize our script.</p>
+<p>Let's understand the format of the recorded data first. The Trossen MobileAI records its data in lerobot format, where it outputs <code>parquet</code> files containing the robot state and action vectors. Both arms' joints and velocities are already concatenated, with the grippers inside the flattened vector. This means that both arms are logged into one vector.</p>
+<p>This is great, because we can treat the action and state as one modality, without need to split it by left or right arms. The format of the dataset is:</p>
+<pre><code class="language-python"># Action (16-D)
+0  linear_vel
+1  angular_vel
+2  left_joint_0
+3  left_joint_1
+4  left_joint_2
+5  left_joint_3
+6  left_joint_4
+7  left_joint_5
+8  left_joint_6
+9  right_joint_0
+10 right_joint_1
+11 right_joint_2
+12 right_joint_3
+13 right_joint_4
+14 right_joint_5
+15 right_joint_6
+
+# State (19-D)
+0  odom_x
+1  odom_y
+2  odom_theta
+3  linear_vel
+4  angular_vel
+5–11  left_joint_0 ... left_joint_6
+12–18 right_joint_0 ... right_joint_6
+
+# Cameras
+observation.images.cam_high
+observation.images.cam_left_wrist
+observation.images.cam_right_wrist
+</code></pre>
 </section>
 
             </main>
