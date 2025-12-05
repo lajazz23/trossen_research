@@ -30,8 +30,8 @@
 <link href="../css/theme.css" rel="stylesheet">
 <link href="../css/theme.tile_grid.css" rel="stylesheet">
 <link href="../css/theme.footer.css" rel="stylesheet">
-<!-- dark color palette -->
-<link href="../css/palettes/dark.css" rel="stylesheet">
+<!-- light color palette -->
+<link href="../css/palettes/light.css" rel="stylesheet">
 
 <!-- page layout -->
 <style>
@@ -550,13 +550,14 @@
 <nav>
     <ul>
         <li><a href="#setup-for-incorporating-gr00t-n15-with-trossen-mobileai">Setup for Incorporating GR00T-N1.5 with Trossen MobileAI</a></li>
-        <li><a href="#troubleshooting">Troubleshooting</a></li>
+        <li><a href="#fine-tuning-on-our-dataset">Fine-tuning on Our Dataset</a></li><li><a href="#deploying-on-the-mobileai">Deploying on the MobileAI</a></li>
     </ul>
 </nav>
 </aside>
             <main id="terminal-mkdocs-main-content">
 <section id="mkdocs-terminal-content">
     <h1 id="setup-for-incorporating-gr00t-n15-with-trossen-mobileai">Setup for Incorporating GR00T-N1.5 with Trossen MobileAI</h1>
+<h2 id="fine-tuning-on-our-dataset">Fine-tuning on Our Dataset</h2>
 <p>GR00T-N1.5 does not have pre-defined configs for robots like the Trossen MobileAI, where it is not a full humanoid yet it has bimanual arms that have end-effector control. Thus, we will have to customize our script.</p>
 <p>Let's understand the format of the recorded data first. The Trossen MobileAI records its data in lerobot format, where it outputs <code>parquet</code> files containing the robot state and action vectors. Both arms' joints and velocities are already concatenated, with the grippers inside the flattened vector. This means that both arms are logged into one vector.</p>
 <p>This is great, because we can treat the action and state as one modality, without need to split it by left or right arms. The format of the dataset is:</p>
@@ -594,14 +595,18 @@ observation.images.cam_right_wrist
 </code></pre>
 <p>Now here's a problem--like most of the VLAs I've worked with, GR00T-N1.5 has a specific way to read the data, and unfortunately, our dataset isn't fully readable by it yet.</p>
 <p>Here are the changes I've done:</p>
+<ul>
+<li>
+<p>Add a custom config file for the Trossen MobileAI robot to the <a href="https://github.com/lajazz23/MobileAI-GR00TN1.5/blob/main/gr00t/experiment/data_config.py">data_config.py</a> file.  </p>
 <ol>
-<li>Add a custom config file for the Trossen MobileAI robot to the <a href="https://github.com/lajazz23/MobileAI-GR00TN1.5/blob/main/gr00t/experiment/data_config.py">data_config.py</a> file.<ul>
-<li>As shown above, the cameras are conventially named "observation.images...", but it must be changed.</li>
-<li>I removed all instances of that, so that only "cam_..." was left. This includes renaming the video folders in the dataset. </li>
-</ul>
-</li>
-<li>Added a <code>modality.json</code> file to the <code>dataset/meta</code> folder from our dataset. Something like this:</li>
+<li>As shown above, the cameras are conventionally named "observation.images...", but it must be changed. </li>
+<li>I removed all instances of that, so that only "cam_..." was left. This includes renaming the video folders in the dataset.</li>
 </ol>
+</li>
+<li>
+<p>Added a <code>modality.json</code> file to the <code>dataset/meta</code> folder from our dataset. Something like this:</p>
+</li>
+</ul>
 <pre><code>{
   &quot;video&quot;: {
     &quot;cam_high&quot;: { &quot;type&quot;: &quot;rgb&quot;, &quot;description&quot;: &quot;High camera video stream&quot; },
@@ -629,12 +634,44 @@ observation.images.cam_right_wrist
   &quot;language&quot;: {}
 }
 </code></pre>
-<ol>
-<li>Changed the </li>
-</ol>
+<ul>
+<li>Changed <code>observation.state</code> to <code>observation</code> in <code>info.json</code></li>
+</ul>
+<h2 id="deploying-on-the-mobileai">Deploying on the MobileAI</h2>
+<p>Let's now try to deploy the trained policy on the actual robot. </p>
 <h3 id="troubleshooting">Troubleshooting</h3>
 <p><strong>Error:</strong> Not enought memory (dependent on size of dataset).</p>
 <p><strong>Solution:</strong> Change the batch size in <code>Isaac-GR00T/scripts/gr00t_finetune.py</code> to a smaller number.</p>
+<h3 id="other-stuff">Other Stuff</h3>
+<p>If you're curious, these are the flags/options and arguments for <code>gr00t_finetune.py</code>. You can find these if you run <code>python gr00t_finetune.py --help</code>.</p>
+<p><strong>--dataset-path</strong> (STR) path to the dataset</p>
+<p><strong>--output-dir</strong> (STR) directory to save the model checkpoint</p>
+<p><strong>--data-config</strong> (STR) the data config for training      </p>
+<p><strong>--batch-size</strong> (INT) batch size for training, which is dependent on dataset size and GPU capability</p>
+<p><strong>--max-steps</strong> (INT) max training steps</p>
+<p><strong>--num-gpus</strong> (INT) number of GPUs used</p>
+<p><strong>--save-steps</strong> (INT) factor of which it saves the checkpoints</p>
+<p><strong>--base-model-path</strong> (STR) path to model to be fine-tuned on</p>
+<p><strong>--tune-llm /--no-tune-llm</strong>  fine-tune language model backbone</p>
+<p><strong>--tune-visual / --no-tune-visual</strong> for if the visual data is different from pre-training data</p>
+<p><strong>--tune-projector / --no-tune-projector</strong> helps align the embodiment-specific action and state spaces</p>
+<p><strong>--tune-diffusion-model /--no-tune-diffusion-model</strong> to finetune the diffusion model</p>
+<p><strong>--resume / --no-resume</strong> resume from a checkpoint</p>
+<p><strong>--learning-rate</strong> (FLOAT) learning rate</p>
+<p><strong>--weight-decay</strong> (FLOAT) weight decay </p>
+<p><strong>--warmup-ratio</strong>  (FLOAT) ratio of total training steps used for warmup</p>
+<p><strong>--lora-rank</strong>  (INT) rank for LoRA</p>
+<p><strong>--lora-alpha</strong> (INT) alpha value for LoRA</p>
+<p><strong>--lora-dropout</strong> (FLOAT)  dropout rate for LoRA</p>
+<p><strong>--lora-full-model / --no-lora-full-model</strong> train on full LoRA, if not, then only action head is used</p>
+<p><strong>--dataloader-num-workers</strong> (INT) number of workers for data loading per GPU. </p>
+<p><strong>--gradient-accumulation-steps</strong> (INT) gradient accumulation steps for training</p>
+<p><strong>--dataloader-prefetch-factor</strong> (INT)  prefetch factor for data loading</p>
+<p><strong>--report-to training</strong> metrics report</p>
+<p><strong>--embodiment-tag</strong> embodiement for training</p>
+<p><strong>--video-backend</strong> type of video backend for training</p>
+<p><strong>--balance-dataset-weights / --no-balance-dataset-weights</strong> balance the dataset weights</p>
+<p><strong>--balance-trajectory-weights / --no-balance-trajectory-weights</strong> sample trajectories within a dataset weighted by their length</p>
 </section>
 
             </main>
