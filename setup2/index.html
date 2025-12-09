@@ -550,7 +550,7 @@
 <nav>
     <ul>
         <li><a href="#setup-for-incorporating-gr00t-n15-with-trossen-mobileai">Setup for Incorporating GR00T-N1.5 with Trossen MobileAI</a></li>
-        <li><a href="#fine-tuning-on-our-dataset">Fine-tuning on Our Dataset</a></li><li><a href="#deploying-on-the-mobileai-software">Deploying on the MobileAI (Software)</a></li>
+        <li><a href="#fine-tuning-on-our-dataset">Fine-tuning on Our Dataset</a></li><li><a href="#integrating-the-trossen-lerobot-repository">Integrating the Trossen Lerobot Repository</a></li><li><a href="#deploying-on-the-mobileai-software">Deploying on the MobileAI (Software)</a></li>
     </ul>
 </nav>
 </aside>
@@ -637,6 +637,14 @@ observation.images.cam_right_wrist
 <ul>
 <li>Changed <code>observation.state</code> to <code>observation</code> in <code>info.json</code></li>
 </ul>
+<h2 id="integrating-the-trossen-lerobot-repository">Integrating the Trossen Lerobot Repository</h2>
+<p>Next, we'll have to use the Trossen Lerobot repository. I placed it inside the Isaac-GR00T folder.</p>
+<pre><code>conda activate groble
+cd Isaac-GR00T
+git clone https://github.com/TrossenRobotics/lerobot_trossen.git
+cd lerobot_trossen
+pip install -e . --no-deps
+</code></pre>
 <h2 id="deploying-on-the-mobileai-software">Deploying on the MobileAI (Software)</h2>
 <p>Let's now try to work on getting the policy deployed on the actual robot. Since GR00T-N1.5 uses a client-server setup, we need to tweak it to be able to send the inference to the robot configurations.</p>
 <p>The documentation mentions 2 client modes--<strong>ZMQ</strong> and <strong>HTTPS</strong>.
