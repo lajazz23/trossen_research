@@ -549,25 +549,30 @@
 </nav><hr>
 <nav>
     <ul>
-        <li><a href="#setup-for-gr00t-n15">Setup for GR00T-N1.5</a></li>
+        <li><a href="#setup-for-gr00t-n15-trossen-lerobot">Setup for GR00T-N1.5 &amp; Trossen Lerobot</a></li>
         <li><a href="#installing-the-repo">Installing the repo</a></li><li><a href="#starting-their-demos">Starting Their Demos</a></li><li><a href="#troubleshooting">Troubleshooting</a></li>
     </ul>
 </nav>
 </aside>
             <main id="terminal-mkdocs-main-content">
 <section id="mkdocs-terminal-content">
-    <h1 id="setup-for-gr00t-n15">Setup for GR00T-N1.5</h1>
+    <h1 id="setup-for-gr00t-n15-trossen-lerobot">Setup for GR00T-N1.5 &amp; Trossen Lerobot</h1>
 <h2 id="installing-the-repo">Installing the repo</h2>
 <p>First, clone the repository.</p>
 <pre><code>git clone https://github.com/NVIDIA/Isaac-GR00T
 cd Isaac-GR00T
 </code></pre>
 <p>Then create a conda environment for it.</p>
-<pre><code>conda create -n groble python=3.10
+<pre><code>conda create -n groble python=3.10 -y
 conda activate groble
 </code></pre>
-<p>Next, install the base dependencies.</p>
-<pre><code>pip install --upgrade setuptools
+<p>First, let's setup the trosse_lerobot repo. Then, install the base dependencies. I used <code>uv</code> to download all the dependencies.</p>
+<pre><code>git clone https://github.com/TrossenRobotics/lerobot_trossen.git
+cd lerobot_trossen &amp;&amp; uv pip install -e .
+</code></pre>
+<pre><code class="language-python"># return to the Isaac-GR00T folder
+cd ..
+pip install --upgrade setuptools
 pip install -e .[base]
 </code></pre>
 <p>Now it gets tricky, since my workstation is new, it's gpu architecture is sm120. I uninstall the torch from the dependencies and instead install the nightly build of PyTorch for CUDA 12.8.</p>
@@ -582,6 +587,7 @@ pip install --no-build-isolation &quot;git+https://github.com/facebookresearch/p
 <p>Then reinstall the gr00t package, as well as flash-attn.</p>
 <pre><code>pip install -e .[base] --no-deps
 pip install --no-build-isolation flash-attn
+pip install numpy==1.23.5
 </code></pre>
 <h2 id="starting-their-demos">Starting Their Demos</h2>
 <p>They begin with the quick start, where you can download their model checkpoint and run inference via client-server.</p>
