@@ -550,7 +550,7 @@
 <nav>
     <ul>
         <li><a href="#setup-for-incorporating-gr00t-n15-with-trossen-mobileai">Setup for Incorporating GR00T-N1.5 with Trossen MobileAI</a></li>
-        <li><a href="#fine-tuning-on-our-dataset">Fine-tuning on Our Dataset</a></li><li><a href="#deploying-on-the-mobileai">Deploying on the MobileAI</a></li>
+        <li><a href="#fine-tuning-on-our-dataset">Fine-tuning on Our Dataset</a></li><li><a href="#deploying-on-the-mobileai-software">Deploying on the MobileAI (Software)</a></li>
     </ul>
 </nav>
 </aside>
@@ -637,8 +637,12 @@ observation.images.cam_right_wrist
 <ul>
 <li>Changed <code>observation.state</code> to <code>observation</code> in <code>info.json</code></li>
 </ul>
-<h2 id="deploying-on-the-mobileai">Deploying on the MobileAI</h2>
-<p>Let's now try to deploy the trained policy on the actual robot. </p>
+<h2 id="deploying-on-the-mobileai-software">Deploying on the MobileAI (Software)</h2>
+<p>Let's now try to work on getting the policy deployed on the actual robot. Since GR00T-N1.5 uses a client-server setup, we need to tweak it to be able to send the inference to the robot configurations.</p>
+<p>The documentation mentions 2 client modes--<strong>ZMQ</strong> and <strong>HTTPS</strong>.
+- ZMQ is lightweight and fast, making it  good for local network.
+- HTTP is better for connecting remotely to the robot.</p>
+<p>Let's use ZMQ, since we want to connect to the robot directly.</p>
 <h3 id="troubleshooting">Troubleshooting</h3>
 <p><strong>Error:</strong> Not enought memory (dependent on size of dataset).</p>
 <p><strong>Solution:</strong> Change the batch size in <code>Isaac-GR00T/scripts/gr00t_finetune.py</code> to a smaller number.</p>
