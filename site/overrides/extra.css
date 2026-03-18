@@ -1,75 +1,197 @@
-/* red h1 */
 h1 {
-  color: #c31eff !important; /* tomato red */
+  color: #f93288 !important; /* tomato red */
   font-size: 2em !important;
 }
 
-/* orange h2 */
 h2 {
-  color: #ab5dff !important; /* orange */
+  color: #ef6384 !important; /* orange */
   font-size: 1.5em !important;
 }
 
 /* other headings */
 h3, h4, h5, h6 {
-  color: #ff5fcade !important;
-  font-size: 1em !important;
+  color: #ff5f5fde !important;
+  font-size: 1.3em !important;
 }
 
-.terminal-mkdocs-side-nav-item--active {
-  color: #e13aff !important; /* bright yellow text */
-  font-weight: bold;
-}
 
 /* site title style */
 a.no-style {
-  font-size: 1.4em !important;
-  color: #ff002f !important; 
+  font-size: 1.6em !important;
+  color: #710053 !important; 
 }
 
 /* Color main text */
 body {
-  color: #5c4343 !important; /* Light gray text */
+  color: #5c4343e1 !important; /* Light gray text */
 }
 
-
 code {
-  color: #7c6c74 !important; /* Pinkish text */
+  color: #755674 !important; /* Pinkish text */
 }
 
 /* Color main background */
 body {
-  background-color: #fbfaff !important; 
+  background-color: #d5b8d43a !important; 
 }
 
 
 /* Main layout container */
 .container, .md-container, .site-container {
   max-width: 100% !important;
-  width: 85% !important;
+  width: 80% !important;
   margin: 0 auto !important;
 }
 
-/* Make the main grid a flex container */
 .terminal-mkdocs-main-grid {
   display: flex;
   flex-direction: row;
-  width: 100%;
+  width: 95%;
 }
 
-/* Sidebar panel */
 #terminal-mkdocs-side-panel {
   width: 250px !important;
   flex: 0 0 250px !important;
   max-width: 250px;
   overflow-y: auto;
+
+  border: 3px solid #874d8762; 
+  box-sizing: border-box;
+  border-radius: 8px;
+  padding: 10px;  
+  background-color: #bda5bc3a;
+}
+
+#terminal-mkdocs-side-panel a { 
+  color: #865686d5 !important; 
+}
+#terminal-mkdocs-side-panel a:hover { 
+  color: #b986b9 !important; 
+}
+
+#terminal-mkdocs-side-panel .terminal-mkdocs-side-nav-item--active a {
+  color: #e13aff !important;
+  font-weight: 700;
+  background: #ffe6f9;     /* optional highlight pill */
+  border-radius: 6px;
+  padding: 4px 8px;
+  display: inline-block;
+}
+
+/* Base link color inside the sidebar */
+#terminal-mkdocs-side-panel a {
+  color: #865686d5 !important; 
+  text-decoration: none; 
+}
+
+#terminal-mkdocs-side-panel a:visited {
+  color: #865686d5 !important;         /* same as base, or choose a slightly darker tone */
+}
+
+/* hover */
+#terminal-mkdocs-side-panel a:hover,
+#terminal-mkdocs-side-panel a:focus {
+  color: #b986b9 !important; 
+  background: #f4f3ff !important;      /* soft tint on hover/focus */
+  border-radius: 4px;
+}
+
+/* Active (mouse down) — optional subtle accent */
+#terminal-mkdocs-side-panel a:active {
+  color: #ef6384 !important;           /* matches your h2 accent */
+}
+ 
+#terminal-mkdocs-side-panel .terminal-mkdocs-side-nav-item--active a,
+#terminal-mkdocs-side-panel a.terminal-mkdocs-side-nav-item--active,
+#terminal-mkdocs-side-panel a[aria-current="page"],
+#terminal-mkdocs-side-panel .md-nav__link--active {   /* covers themes that use Material-like class names */
+  color: #e13aff !important;
+  font-weight: 700;
+  background: #ffe6f9 !important;      /* pastel pill */
+  border-radius: 6px;
+  padding: 4px 8px;
+  display: inline-block;
+  box-shadow: 0 0 0 2px #ffdef0;        /* subtle ring to increase contrast */
+}
+
+#terminal-mkdocs-side-panel a:focus-visible {
+  outline: 2px solid #e13aff !important;
+  outline-offset: 2px;
+  border-radius: 6px;
+  background: #aeafed !important;
 }
 
 /* Main content area */
 #mkdocs-terminal-content {
   flex: 1 1 auto;
   padding: 1rem;
-  max-width: 100;
+  max-width: 90;
+}
+#mkdocs-terminal-content pre,
+#mkdocs-terminal-content .highlight,
+#mkdocs-terminal-content .codehilite {
+  background-color: #fff7f7;
+  border: 3px solid #874d8762;         
+  border-radius: 8px;                   /* rounded corners */
+  padding: 12px 14px;                   /* inner spacing */
+  box-sizing: border-box;
+  overflow: auto; 
+  margin: 1rem 0;
+}
+
+#mkdocs-terminal-content pre code,
+#mkdocs-terminal-content .highlight code,
+#mkdocs-terminal-content .codehilite code {
+  background: transparent;
+  color: #644263;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-size: 0.95em;
+  line-height: 1.5;
+}
+
+#mkdocs-terminal-content pre,
+#mkdocs-terminal-content .highlight,
+#mkdocs-terminal-content .codehilite {
+  box-shadow: 0 2px 8px rgba(135, 77, 135, 0.12);
 }
 
 
+#mkdocs-terminal-content code:not(pre code) {
+  background-color: #ffe6f9 !important;    /* soft pink highlight */
+  color: #710053 !important;               /* deep purple text for contrast */
+  padding: 0.1em 0.35em !important;        /* small pill padding */
+  border-radius: 4px !important;           /* subtle rounding */
+  border: 1px solid #f4c8e8 !important;    /* light border to pop from body */
+  box-shadow: 0 1px 0 rgba(135, 77, 135, 0.08) !important;
+  white-space: normal;                     /* allow wrapping in long paragraphs */
+}
+
+/* Inline code inside links — keep readable on hover/focus */
+#mkdocs-terminal-content a code:not(pre code) {
+  color: #5a0042 !important;
+  border-color: #ebb6de !important;
+}
+
+/* Optional: hover/focus effects for inline code */
+#mkdocs-terminal-content code:not(pre code):hover,
+#mkdocs-terminal-content code:not(pre code):focus {
+  background-color: #ffdef0 !important;
+  border-color: #e9a8d6 !important;
+}
+
+
+#mkdocs-terminal-content a:visited {
+  color: #4545a7 !important; 
+}
+
+/* Active (mouse down) */
+#mkdocs-terminal-content a:active {
+  color: #ef6384 !important;   
+}
+
+/* Keyboard focus (accessibility) */
+#mkdocs-terminal-content a:focus-visible {
+  outline: 2px solid #e13aff !important;
+  outline-offset: 3px;
+  border-radius: 4px;
+}
