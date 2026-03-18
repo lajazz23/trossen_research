@@ -11,19 +11,19 @@ h2 {
 /* other headings */
 h3, h4, h5, h6 {
   color: #ff5f5fde !important;
-  font-size: 1em !important;
+  font-size: 1.3em !important;
 }
 
 
 /* site title style */
 a.no-style {
-  font-size: 1.4em !important;
+  font-size: 1.6em !important;
   color: #710053 !important; 
 }
 
 /* Color main text */
 body {
-  color: #5c4343 !important; /* Light gray text */
+  color: #5c4343e1 !important; /* Light gray text */
 }
 
 code {
@@ -39,15 +39,14 @@ body {
 /* Main layout container */
 .container, .md-container, .site-container {
   max-width: 100% !important;
-  width: 85% !important;
+  width: 80% !important;
   margin: 0 auto !important;
 }
 
-/* Make the main grid a flex container */
 .terminal-mkdocs-main-grid {
   display: flex;
   flex-direction: row;
-  width: 100%;
+  width: 95%;
 }
 
 #terminal-mkdocs-side-panel {
@@ -187,7 +186,7 @@ body {
 
 /* Active (mouse down) */
 #mkdocs-terminal-content a:active {
-  color: #ef6384 !important;          /* warm pink — matches your h2 */
+  color: #ef6384 !important;   
 }
 
 /* Keyboard focus (accessibility) */
