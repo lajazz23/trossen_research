@@ -1,30 +1,24 @@
-/* red h1 */
 h1 {
-  color: #c31eff !important; /* tomato red */
+  color: #f93288 !important; /* tomato red */
   font-size: 2em !important;
 }
 
-/* orange h2 */
 h2 {
-  color: #ab5dff !important; /* orange */
+  color: #ef6384 !important; /* orange */
   font-size: 1.5em !important;
 }
 
 /* other headings */
 h3, h4, h5, h6 {
-  color: #ff5fcade !important;
+  color: #ff5f5fde !important;
   font-size: 1em !important;
 }
 
-.terminal-mkdocs-side-nav-item--active {
-  color: #e13aff !important; /* bright yellow text */
-  font-weight: bold;
-}
 
 /* site title style */
 a.no-style {
   font-size: 1.4em !important;
-  color: #ff002f !important; 
+  color: #710053 !important; 
 }
 
 /* Color main text */
@@ -32,14 +26,13 @@ body {
   color: #5c4343 !important; /* Light gray text */
 }
 
-
 code {
-  color: #7c6c74 !important; /* Pinkish text */
+  color: #755674 !important; /* Pinkish text */
 }
 
 /* Color main background */
 body {
-  background-color: #fbfaff !important; 
+  background-color: #d5b8d43a !important; 
 }
 
 
@@ -57,19 +50,66 @@ body {
   width: 100%;
 }
 
-/* Sidebar panel */
 #terminal-mkdocs-side-panel {
   width: 250px !important;
   flex: 0 0 250px !important;
   max-width: 250px;
   overflow-y: auto;
+
+  border: 3px solid #874d8762; 
+  box-sizing: border-box;
+  border-radius: 8px;
+  padding: 10px;  
+  background-color: #bda5bc3a;
 }
+
+#terminal-mkdocs-side-panel a { 
+  color: #865686d5 !important; 
+}
+#terminal-mkdocs-side-panel a:hover { 
+  color: #b986b9 !important; 
+}
+
+#terminal-mkdocs-side-panel .terminal-mkdocs-side-nav-item--active a {
+  color: #e13aff !important;
+  font-weight: 700;
+  background: #ffe6f9;     /* optional highlight pill */
+  border-radius: 6px;
+  padding: 4px 8px;
+  display: inline-block;
+}
+
 
 /* Main content area */
 #mkdocs-terminal-content {
   flex: 1 1 auto;
   padding: 1rem;
-  max-width: 100;
+  max-width: 90;
+}
+#mkdocs-terminal-content pre,
+#mkdocs-terminal-content .highlight,
+#mkdocs-terminal-content .codehilite {
+  background-color: #fff7f7;
+  border: 3px solid #874d8762;         
+  border-radius: 8px;                   /* rounded corners */
+  padding: 12px 14px;                   /* inner spacing */
+  box-sizing: border-box;
+  overflow: auto; 
+  margin: 1rem 0;
 }
 
+#mkdocs-terminal-content pre code,
+#mkdocs-terminal-content .highlight code,
+#mkdocs-terminal-content .codehilite code {
+  background: transparent;
+  color: #644263;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-size: 0.95em;
+  line-height: 1.5;
+}
 
+#mkdocs-terminal-content pre,
+#mkdocs-terminal-content .highlight,
+#mkdocs-terminal-content .codehilite {
+  box-shadow: 0 2px 8px rgba(135, 77, 135, 0.12);
+}
