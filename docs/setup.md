@@ -1,6 +1,6 @@
 # Setup for GR00T-N1.5 & Trossen Lerobot
 ## Installing the repo
-First, clone the repository.
+First, clone the [repository](https://github.com/NVIDIA/Isaac-GR00T/tree/n1.5-release).
 
 ```bash
 git clone https://github.com/NVIDIA/Isaac-GR00T
@@ -14,7 +14,7 @@ conda create -n groble python=3.10 -y
 conda activate groble
 ```
 
-First, let's setup the trosse_lerobot repo. Then, install the base dependencies. I used `uv` to download all the dependencies.
+First, let's setup the [trossen_lerobot](https://github.com/TrossenRobotics/lerobot_trossen) repo. Then, install the base dependencies. I used `uv` to download all the dependencies.
 
 ```bash
 git clone https://github.com/TrossenRobotics/lerobot_trossen.git
@@ -28,8 +28,7 @@ pip install --upgrade setuptools
 pip install -e .[base]
 ```
 
-Now it gets tricky, since my workstation is new, it's gpu architecture is sm120. I uninstall the torch from the dependencies and instead install the nightly build of PyTorch for CUDA 12.8.
-
+Now it gets tricky, since my workstation is new--it's gpu architecture is sm120. I uninstall the torch from the dependencies and instead install the nightly build of PyTorch for CUDA 12.8. This step is only done if you have the Blackwell GPUs (check by running, `nvidia-smi -L` in the terminal).
 ```bash
 pip uninstall torch torchvision
 pip3 install --pre torch torchvision --index-url https://download.pytorch.org/whl/nightly/cu128

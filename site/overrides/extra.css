@@ -104,14 +104,14 @@ body {
 #terminal-mkdocs-side-panel .terminal-mkdocs-side-nav-item--active a,
 #terminal-mkdocs-side-panel a.terminal-mkdocs-side-nav-item--active,
 #terminal-mkdocs-side-panel a[aria-current="page"],
-#terminal-mkdocs-side-panel .md-nav__link--active {   /* covers themes that use Material-like class names */
+#terminal-mkdocs-side-panel .md-nav__link--active { 
   color: #e13aff !important;
   font-weight: 700;
-  background: #ffe6f9 !important;      /* pastel pill */
+  background: #ffe6f9 !important; 
   border-radius: 6px;
   padding: 4px 8px;
   display: inline-block;
-  box-shadow: 0 0 0 2px #ffdef0;        /* subtle ring to increase contrast */
+  box-shadow: 0 0 0 2px #ffdef0; 
 }
 
 #terminal-mkdocs-side-panel a:focus-visible {
@@ -143,7 +143,7 @@ body {
 #mkdocs-terminal-content .highlight code,
 #mkdocs-terminal-content .codehilite code {
   background: transparent;
-  color: #644263;
+  color: #4e153c;
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   font-size: 0.95em;
   line-height: 1.5;
@@ -171,8 +171,7 @@ body {
   color: #5a0042 !important;
   border-color: #ebb6de !important;
 }
-
-/* Optional: hover/focus effects for inline code */
+ 
 #mkdocs-terminal-content code:not(pre code):hover,
 #mkdocs-terminal-content code:not(pre code):focus {
   background-color: #ffdef0 !important;
@@ -181,7 +180,7 @@ body {
 
 
 #mkdocs-terminal-content a:visited {
-  color: #4545a7 !important; 
+  color: #bb700d !important; 
 }
 
 /* Active (mouse down) */
@@ -194,4 +193,81 @@ body {
   outline: 2px solid #e13aff !important;
   outline-offset: 3px;
   border-radius: 4px;
+}
+
+/* Base link style in paragraphs/lists */
+#mkdocs-terminal-content p a,
+#mkdocs-terminal-content li a {
+  color: #e13aff !important;
+  text-decoration: none !important;
+  display: inline-block;                             /* allows padding/bg */
+  padding: 0 4px !important;                         /* tiny padding so it doesn't jump */
+  border-radius: 6px !important;                     /* slight rounding by default */
+  transition: color 0.15s ease, 
+              background-color 0.15s ease, 
+              box-shadow 0.15s ease !important;
+}
+
+/* Hover/focus: pastel pill, no border change */
+#mkdocs-terminal-content p a:hover,
+#mkdocs-terminal-content li a:hover,
+#mkdocs-terminal-content p a:focus,
+#mkdocs-terminal-content li a:focus {
+  color: #710053 !important;               /* deep purple text */
+  background-color: #ffc9d4 !important;     /* soft lavender tint */
+  border-radius: 10px !important;           /* rounder on hover */
+  text-decoration: none !important;         /* keep clean */
+  box-shadow: none !important; 
+}
+
+/* Visited + hover (ensure consistent hover color) */
+#mkdocs-terminal-content p a:visited:hover,
+#mkdocs-terminal-content li a:visited:hover {
+  color: #710053 !important;
+}
+
+/* Optional: active click state */
+#mkdocs-terminal-content p a:active,
+#mkdocs-terminal-content li a:active {
+  color: #ef6384 !important;                         /* matches your h2 accent */
+  background-color: #ffe6f9 !important;              /* slightly warmer hover */
+}
+
+/* Make the terminal prompt arrow bigger and styled */
+.terminal-prompt::before {
+  content: ">" !important;            /* nicer chevron; keep "> " if you prefer */
+  font-size: 1.7em !important;          /* increase size */
+  line-height: 1 !important;            /* keep it tight */
+  color: #ee1de0 !important;            /* pink/purple to match your theme */
+  font-weight: 700;                     /* bolder arrow */
+  display: inline-block;
+  transform: translateY(1px);           /* tiny vertical nudge */
+  margin-right: 6px;                    /* spacing before the title */
+}
+
+
+#terminal-mkdocs-side-panel .terminal-mkdocs-side-nav-section-no-index {
+  color: #e13affea !important; 
+  font-weight: 600 !important;  
+  font-size: 1.05em !important;  
+  padding: 6px 4px !important;     /* spacing */
+  margin-top: 10px !important;     /* some breathing room above */
+  margin-bottom: 4px !important;
+  letter-spacing: 0.4px;           /* optional polish */
+}
+
+
+
+#terminal-mkdocs-side-panel a[aria-current="page"],
+#terminal-mkdocs-side-panel .terminal-mkdocs-side-nav-item--active > a,
+#terminal-mkdocs-side-panel a.terminal-mkdocs-side-nav-item--active,
+#terminal-mkdocs-side-panel .md-nav__link--active {
+  font-weight: 800 !important;            /* stronger bold */
+  color: #e13aff !important;              /* keep your accent */
+}
+
+/* Optional: also bold the parent section when a child is active */
+#terminal-mkdocs-side-panel .terminal-mkdocs-side-nav-item--active,
+#terminal-mkdocs-side-panel .terminal-mkdocs-side-nav-item--active > .terminal-mkdocs-side-nav-section-no-index {
+  font-weight: 700 !important;
 }
