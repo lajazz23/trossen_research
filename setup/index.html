@@ -585,7 +585,7 @@ cd Isaac-GR00T
 <pre><code class="language-bash">conda create -n groble python=3.10 -y
 conda activate groble
 </code></pre>
-<p>First, let's setup the trosse_lerobot repo. Then, install the base dependencies. I used <code>uv</code> to download all the dependencies.</p>
+<p>First, let's setup the <a href="https://github.com/TrossenRobotics/lerobot_trossen">trossen_lerobot</a> repo. Then, install the base dependencies. I used <code>uv</code> to download all the dependencies.</p>
 <pre><code class="language-bash">git clone https://github.com/TrossenRobotics/lerobot_trossen.git
 cd lerobot_trossen &amp;&amp; uv pip install -e .
 </code></pre>
@@ -594,7 +594,7 @@ cd ..
 pip install --upgrade setuptools
 pip install -e .[base]
 </code></pre>
-<p>Now it gets tricky, since my workstation is new, it's gpu architecture is sm120. I uninstall the torch from the dependencies and instead install the nightly build of PyTorch for CUDA 12.8.</p>
+<p>Now it gets tricky, since my workstation is new--it's gpu architecture is sm120. I uninstall the torch from the dependencies and instead install the nightly build of PyTorch for CUDA 12.8. This step is only done if you have the Blackwell GPUs (check by running, <code>nvidia-smi -L</code> in the terminal).</p>
 <pre><code class="language-bash">pip uninstall torch torchvision
 pip3 install --pre torch torchvision --index-url https://download.pytorch.org/whl/nightly/cu128
 </code></pre>
