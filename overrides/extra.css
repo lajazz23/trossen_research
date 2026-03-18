@@ -79,6 +79,48 @@ body {
   display: inline-block;
 }
 
+/* Base link color inside the sidebar */
+#terminal-mkdocs-side-panel a {
+  color: #865686d5 !important; 
+  text-decoration: none; 
+}
+
+#terminal-mkdocs-side-panel a:visited {
+  color: #865686d5 !important;         /* same as base, or choose a slightly darker tone */
+}
+
+/* hover */
+#terminal-mkdocs-side-panel a:hover,
+#terminal-mkdocs-side-panel a:focus {
+  color: #b986b9 !important; 
+  background: #f4f3ff !important;      /* soft tint on hover/focus */
+  border-radius: 4px;
+}
+
+/* Active (mouse down) — optional subtle accent */
+#terminal-mkdocs-side-panel a:active {
+  color: #ef6384 !important;           /* matches your h2 accent */
+}
+ 
+#terminal-mkdocs-side-panel .terminal-mkdocs-side-nav-item--active a,
+#terminal-mkdocs-side-panel a.terminal-mkdocs-side-nav-item--active,
+#terminal-mkdocs-side-panel a[aria-current="page"],
+#terminal-mkdocs-side-panel .md-nav__link--active {   /* covers themes that use Material-like class names */
+  color: #e13aff !important;
+  font-weight: 700;
+  background: #ffe6f9 !important;      /* pastel pill */
+  border-radius: 6px;
+  padding: 4px 8px;
+  display: inline-block;
+  box-shadow: 0 0 0 2px #ffdef0;        /* subtle ring to increase contrast */
+}
+
+#terminal-mkdocs-side-panel a:focus-visible {
+  outline: 2px solid #e13aff !important;
+  outline-offset: 2px;
+  border-radius: 6px;
+  background: #aeafed !important;
+}
 
 /* Main content area */
 #mkdocs-terminal-content {
@@ -112,4 +154,45 @@ body {
 #mkdocs-terminal-content .highlight,
 #mkdocs-terminal-content .codehilite {
   box-shadow: 0 2px 8px rgba(135, 77, 135, 0.12);
+}
+
+
+#mkdocs-terminal-content code:not(pre code) {
+  background-color: #ffe6f9 !important;    /* soft pink highlight */
+  color: #710053 !important;               /* deep purple text for contrast */
+  padding: 0.1em 0.35em !important;        /* small pill padding */
+  border-radius: 4px !important;           /* subtle rounding */
+  border: 1px solid #f4c8e8 !important;    /* light border to pop from body */
+  box-shadow: 0 1px 0 rgba(135, 77, 135, 0.08) !important;
+  white-space: normal;                     /* allow wrapping in long paragraphs */
+}
+
+/* Inline code inside links — keep readable on hover/focus */
+#mkdocs-terminal-content a code:not(pre code) {
+  color: #5a0042 !important;
+  border-color: #ebb6de !important;
+}
+
+/* Optional: hover/focus effects for inline code */
+#mkdocs-terminal-content code:not(pre code):hover,
+#mkdocs-terminal-content code:not(pre code):focus {
+  background-color: #ffdef0 !important;
+  border-color: #e9a8d6 !important;
+}
+
+
+#mkdocs-terminal-content a:visited {
+  color: #4545a7 !important; 
+}
+
+/* Active (mouse down) */
+#mkdocs-terminal-content a:active {
+  color: #ef6384 !important;          /* warm pink — matches your h2 */
+}
+
+/* Keyboard focus (accessibility) */
+#mkdocs-terminal-content a:focus-visible {
+  outline: 2px solid #e13aff !important;
+  outline-offset: 3px;
+  border-radius: 4px;
 }
