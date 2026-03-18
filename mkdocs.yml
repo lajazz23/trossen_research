@@ -5,7 +5,7 @@ site_author: lajazz23
 
 theme:
   name: terminal
-  palette: dark
+  palette: light
   highlightjs: true
   hljs_languages:
     - yaml
@@ -31,6 +31,10 @@ nav:
       - Pi0.5: 'pi.md'
       - RT-1: 'rt.md'
       - CLAW: 'claw.md'
+  - Installation::
+      - Setting Up GR00T-N1.5: 'setup.md'
+      - GR00T-N1.5 and MobileAI: 'setup2.md'
+      - Isaac Lab Mimic & VR: 'vr_setup.md'
 
 extra_css:
   - overrides/extra.css

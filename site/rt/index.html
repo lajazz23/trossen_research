@@ -30,8 +30,8 @@
 <link href="../css/theme.css" rel="stylesheet">
 <link href="../css/theme.tile_grid.css" rel="stylesheet">
 <link href="../css/theme.footer.css" rel="stylesheet">
-<!-- dark color palette -->
-<link href="../css/palettes/dark.css" rel="stylesheet">
+<!-- light color palette -->
+<link href="../css/palettes/light.css" rel="stylesheet">
 
 <!-- page layout -->
 <style>
@@ -112,6 +112,8 @@
                     </a>
                     <meta property="position" content="1">
                 </li>
+                
+                
                 
                 
                 
@@ -464,6 +466,103 @@
     
   </li>
         
+          
+
+
+
+<li class="terminal-mkdocs-side-nav-li">
+    
+    
+        
+        
+            
+                
+        
+
+        
+            
+    
+        
+        
+            
+            
+            <span class="
+        
+            
+        
+    
+
+    terminal-mkdocs-side-nav-item terminal-mkdocs-side-nav-section-no-index">Installation:</span>
+        
+    
+    
+        
+      
+        
+            <ul class="terminal-mkdocs-side-nav-li-ul">
+        
+            
+            
+                
+                
+            
+
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="
+
+    terminal-mkdocs-side-nav-item" href="../setup/">Setting Up GR00T-N1.5</a>
+        
+    
+    </li>
+            
+        
+            
+            
+                
+                
+            
+
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="
+
+    terminal-mkdocs-side-nav-item" href="../setup2/">GR00T-N1.5 and MobileAI</a>
+        
+    
+    </li>
+            
+        
+            
+            
+                
+                
+            
+
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="
+
+    terminal-mkdocs-side-nav-item" href="../vr_setup/">Isaac Lab Mimic & VR</a>
+        
+    
+    </li>
+            
+            
+    </ul>
+        
+    
+  </li>
+        
     </ul>
   
 </nav><hr>
@@ -477,35 +576,35 @@
             <main id="terminal-mkdocs-main-content">
 <section id="mkdocs-terminal-content">
     <h1 id="rt-1-google">RT-1 (Google)</h1>
-<p>RT-1 is a <strong>real-time transformer-based robot policy</strong> that can control real-world robots.  </p>
+<p>RT-1 is a real-time transformer-based robot policy that can control real-world robots.  </p>
 <hr />
 <h2 id="overview">Overview</h2>
 <ul>
-<li>Designed for <strong>everyday manipulation tasks</strong>: opening doors, moving objects, etc.  </li>
-<li>Takes <strong>language instructions</strong> and a <strong>short video</strong> from the robot camera to guide actions  </li>
-<li>Learns <strong>directly from human demonstrations</strong>, mimicking actions  </li>
-<li>Capable of <strong>generalization, scaled training, and real-world execution</strong>  </li>
-<li>Can generalize <strong>new tasks without retraining</strong> due to language-conditioning and diverse training  </li>
-<li>Direct <strong>robot control policy</strong> (not a vision-language-action model)  </li>
+<li>Designed for everyday manipulation tasks: opening doors, moving objects, etc.  </li>
+<li>Takes language instructions and a short video from the robot camera to guide actions  </li>
+<li>Learns directly from human demonstrations, mimicking actions  </li>
+<li>Capable of generalization, scaled training, and real-world execution  </li>
+<li>Can generalize new tasks without retraining due to language-conditioning and diverse training  </li>
+<li>Direct robot control policy (not a vision-language-action model)  </li>
 <li>Processes a series of images and instructions, not just a single image  </li>
 </ul>
 <hr />
 <h2 id="core">Core</h2>
 <ul>
-<li><strong>Transformer core adapted for robotics</strong>  </li>
-<li><strong>EfficientNet-B3</strong> for image processing  </li>
-<li><strong>FiLM layers</strong> integrate language instructions with visual features  </li>
-<li><strong>TokenLearner</strong> filters for the most relevant information  </li>
+<li>Transformer core adapted for robotics  </li>
+<li>EfficientNet-B3 for image processing  </li>
+<li>FiLM layers integrate language instructions with visual features  </li>
+<li>TokenLearner filters for the most relevant information  </li>
 <li>Transformer outputs decisions about the robot’s actions  </li>
 </ul>
 <hr />
 <h2 id="method">Method</h2>
 <ul>
-<li>Inputs processed by the core to <strong>extract and compact visual tokens</strong>  </li>
-<li><strong>Decoder-only transformer</strong> processes tokens and outputs discrete tokens for each limb  </li>
+<li>Inputs processed by the core to extract and compact visual tokens  </li>
+<li>Decoder-only transformer processes tokens and outputs discrete tokens for each limb  </li>
 <li>(π0.5 outputs text tokens, which are then passed to a control policy)  </li>
-<li>Trained on <strong>130k real robot demonstrations</strong>, not just internet data  </li>
-<li>Runs at <strong>3 Hz</strong>, providing fast action response for robot execution  </li>
+<li>Trained on 130k real robot demonstrations, not just internet data  </li>
+<li>Runs at 3 Hz, providing fast action response for robot execution  </li>
 </ul>
 <hr />
 <p>Made by Jasmin Lin.</p>

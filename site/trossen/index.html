@@ -30,8 +30,8 @@
 <link href="../css/theme.css" rel="stylesheet">
 <link href="../css/theme.tile_grid.css" rel="stylesheet">
 <link href="../css/theme.footer.css" rel="stylesheet">
-<!-- dark color palette -->
-<link href="../css/palettes/dark.css" rel="stylesheet">
+<!-- light color palette -->
+<link href="../css/palettes/light.css" rel="stylesheet">
 
 <!-- page layout -->
 <style>
@@ -112,6 +112,8 @@
                     </a>
                     <meta property="position" content="1">
                 </li>
+                
+                
                 
                 
                 
@@ -464,6 +466,103 @@
     
   </li>
         
+          
+
+
+
+<li class="terminal-mkdocs-side-nav-li">
+    
+    
+        
+        
+            
+                
+        
+
+        
+            
+    
+        
+        
+            
+            
+            <span class="
+        
+            
+        
+    
+
+    terminal-mkdocs-side-nav-item terminal-mkdocs-side-nav-section-no-index">Installation:</span>
+        
+    
+    
+        
+      
+        
+            <ul class="terminal-mkdocs-side-nav-li-ul">
+        
+            
+            
+                
+                
+            
+
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="
+
+    terminal-mkdocs-side-nav-item" href="../setup/">Setting Up GR00T-N1.5</a>
+        
+    
+    </li>
+            
+        
+            
+            
+                
+                
+            
+
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="
+
+    terminal-mkdocs-side-nav-item" href="../setup2/">GR00T-N1.5 and MobileAI</a>
+        
+    
+    </li>
+            
+        
+            
+            
+                
+                
+            
+
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="
+
+    terminal-mkdocs-side-nav-item" href="../vr_setup/">Isaac Lab Mimic & VR</a>
+        
+    
+    </li>
+            
+            
+    </ul>
+        
+    
+  </li>
+        
     </ul>
   
 </nav><hr>
@@ -479,38 +578,37 @@
     <h1 id="trossen-mobileai-robot-operating-system-ros">Trossen MobileAI &amp; Robot Operating System (ROS)</h1>
 <h2 id="training-simulation">Training &amp; Simulation</h2>
 <ul>
-<li>Data is collected via <strong>teleoperation</strong> and <strong>imitation learning</strong>.  </li>
-<li><strong>LeRobot</strong> is used to collect episodes from physical runs or simulation.  </li>
+<li>Data is collected via teleoperation and imitation learning.  </li>
+<li>LeRobot is used to collect episodes from physical runs or simulation.  </li>
 </ul>
 <h3 id="lerobot-details">LeRobot Details</h3>
 <p><a href="https://www.youtube.com/watch?v=yi9wdm9e53Y">Tutorial Video</a></p>
 <ul>
-<li>Each arm has its own <strong>IP address</strong> to connect to the computer.  </li>
-<li>Arms have <strong>predefined ranges of motion</strong>.  </li>
-<li>Default camera is <strong>Intel RealSense</strong>, but <strong>OpenCV cameras</strong> can also be used.  </li>
+<li>Each arm has its own IP address to connect to the computer.  </li>
+<li>Arms have predefined ranges of motion.  </li>
+<li>Default camera is Intel RealSense, but OpenCV cameras can also be used.  </li>
 <li>Match the camera to the correct index and update the configuration.  </li>
-<li>Note: RealSense cameras may encounter <strong>USB bandwidth issues</strong>.  </li>
-<li>You may <strong>record and upload datasets</strong> to platforms like HuggingFace.  </li>
-<li>Episodes can be watched <strong>remotely</strong> or <strong>locally</strong> (follower arm mimics your movement).  </li>
+<li>Note: RealSense cameras may encounter USB bandwidth issues.  </li>
+<li>Datasets can be saved locally or uploaded to HuggingFace.  </li>
 </ul>
 <h3 id="training-evaluation">Training &amp; Evaluation</h3>
 <ul>
-<li>The robot tries to <strong>mimic the training data</strong> you recorded.  </li>
-<li><strong>Checkpoints</strong> are automatically saved.  </li>
+<li>The robot tries to mimic the training data recorded.  </li>
+<li>Checkpoints are automatically saved.  </li>
 </ul>
-<h3 id="simulation-details-without-hardware">Simulation Details (without hardware)</h3>
+<h3 id="simulation">Simulation</h3>
 <ul>
-<li><strong>MuJoCo window</strong> displays the simulation.  </li>
-<li><strong>End-effector control</strong>: moves the robot based on scripted end-effector movements.  </li>
-<li><strong>Joint-level control</strong>: moves the robot based on controllers.  </li>
-<li><strong>Two-stage pipeline</strong>:  <ol>
+<li>MuJoCo window displays the simulation.  </li>
+<li>End-effector control: moves the robot based on scripted end-effector movements.  </li>
+<li>Joint-level control: moves the robot based on controllers.  </li>
+<li>Two-stage pipeline:  <ol>
 <li>Runs a scripted policy in the environment  </li>
 <li>Joint trajectories are replayed  </li>
 </ol>
 </li>
-<li>You can define the <strong>environment</strong>, <strong>data logs</strong>, and <strong>rewards</strong> yourself.  </li>
+<li>You can define the*environment, data logs, and rewards yourself.  </li>
 <li>
-<p><strong>Motion logic</strong> includes trajectories that define:  </p>
+<p>Motion logic includes trajectories that define:  </p>
 <ul>
 <li>Time  </li>
 <li>3D position  </li>
@@ -519,55 +617,77 @@
 </ul>
 </li>
 <li>
-<p><strong>Interbotix drivers</strong> interface between high-level commands and low-level actions.  </p>
+<p>Interbotix drivers interface between high-level commands and low-level actions.  </p>
 </li>
-<li><strong>State observations</strong> are made using <strong>Intel RealSense RGB-D cameras</strong> (image and depth).  </li>
+<li>State observations are made using Intel RealSense RGB-D cameras (image and depth).  </li>
 <li>Configuration includes serial numbers and IP addresses.  </li>
-<li><strong>Actions</strong> are output by a high-level policy:  </li>
+<li>Actions are output by a high-level policy:  </li>
 <li>In MuJoCo:  <ul>
-<li><strong>End-effector control</strong>: control the gripper pose  </li>
-<li><strong>Joint-level control</strong>: control each joint individually  </li>
+<li>End-effector control: control the gripper pose  </li>
+<li>Joint-level control: control each joint individually  </li>
 </ul>
 </li>
 <li>The driver (Interbotix) translates commands into motor actions, compensates for gravity, ensures safety, and manages low-level protocols.  </li>
 </ul>
 <hr />
 <h2 id="robot-operating-system-ros">Robot Operating System (ROS)</h2>
-<p><strong>Repository:</strong> <a href="https://github.com/Interbotix/interbotix_ros_core">Interbotix ROS Core</a>  </p>
+<p>Repository: <a href="https://github.com/Interbotix/interbotix_ros_core">Interbotix ROS Core</a>  </p>
 <h3 id="interbotix-research-robotics-open-standard-irros-layers">Interbotix Research Robotics Open Standard (IRROS) Layers</h3>
-<p><strong>1. Hardware Layer</strong><br />
-    - Defines actuators and sensors in the robot<br />
-    - Includes actuator interface, controllers, drivers, and motors  </p>
-<p><strong>2. Driver Layer</strong><br />
-    - Contains ROS wrappers to obtain data from sensors and actuators<br />
-    - Repository resides in this layer  </p>
-<p><strong>3. Control Layer</strong><br />
-    - ROS packages for all Interbotix robot configurations<br />
-    - Define parameters for actuators &amp; sensors and manage launch files  </p>
-<p><strong>4. Application Support Layer</strong><br />
-    - Makes working with the robot easier  </p>
-<p><strong>5. Research Layer</strong><br />
-    - User-supplied custom code  </p>
+<ol>
+<li>
+<p>Hardware Layer  </p>
+<ul>
+<li>Defines actuators and sensors in the robot  </li>
+<li>Includes actuator interface, controllers, drivers, and motors  </li>
+</ul>
+</li>
+<li>
+<p>Driver Layer  </p>
+<ul>
+<li>Contains ROS wrappers to obtain data from sensors and actuators  </li>
+<li>Repository resides in this layer  </li>
+</ul>
+</li>
+<li>
+<p>Control Layer  </p>
+<ul>
+<li>ROS packages for all Interbotix robot configurations  </li>
+<li>Define parameters for actuators &amp; sensors and manage launch files  </li>
+</ul>
+</li>
+<li>
+<p>Application Support Layer  </p>
+<ul>
+<li>Makes working with the robot easier  </li>
+</ul>
+</li>
+<li>
+<p>Research Layer  </p>
+<ul>
+<li>User-supplied custom code  </li>
+</ul>
+</li>
+</ol>
 <hr />
 <h3 id="ros-functionality">ROS Functionality</h3>
 <ul>
-<li>Links hardware with software using <strong>nodes</strong>.  <ul>
+<li>Links hardware with software using nodes.  <ul>
 <li>Each node can serve a purpose: data collection, reasoning, output.  </li>
 </ul>
 </li>
-<li>ROS drivers and wrappers allow working with <strong>high-level details</strong> while covering actuator specifics.  </li>
+<li>ROS drivers and wrappers allow working with high-level details while covering actuator specifics.  </li>
 </ul>
 <h3 id="ros-versions">ROS Versions</h3>
 <h4 id="ros-1-noetic">ROS 1 (Noetic)</h4>
 <ul>
-<li>Uses a <strong>master node</strong> to manage all other nodes  </li>
+<li>Uses a master node to manage all other nodes  </li>
 <li>Good for research; can run on multiple robots with custom networking or ROS namespaces  </li>
-<li>Many supporting resources, but considered <strong>legacy</strong>  </li>
+<li>Many supporting resources, but considered legacy  </li>
 </ul>
 <h4 id="ros-2-galactic-humble-rolling">ROS 2 (Galactic, Humble, Rolling)</h4>
 <ul>
-<li>Uses <strong>DDS (Data Distribution Service)</strong>; no central master node  </li>
-<li>Suitable for <strong>real-time robotics</strong> and multi-robot communication  </li>
+<li>Uses DDS (Data Distribution Service); no central master node  </li>
+<li>Suitable for real-time robotics and multi-robot communication  </li>
 <li>More modern and actively updated  </li>
 </ul>
 <hr />

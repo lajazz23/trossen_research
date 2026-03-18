@@ -30,8 +30,8 @@
 <link href="../css/theme.css" rel="stylesheet">
 <link href="../css/theme.tile_grid.css" rel="stylesheet">
 <link href="../css/theme.footer.css" rel="stylesheet">
-<!-- dark color palette -->
-<link href="../css/palettes/dark.css" rel="stylesheet">
+<!-- light color palette -->
+<link href="../css/palettes/light.css" rel="stylesheet">
 
 <!-- page layout -->
 <style>
@@ -112,6 +112,8 @@
                     </a>
                     <meta property="position" content="1">
                 </li>
+                
+                
                 
                 
                 
@@ -464,6 +466,103 @@
     
   </li>
         
+          
+
+
+
+<li class="terminal-mkdocs-side-nav-li">
+    
+    
+        
+        
+            
+                
+        
+
+        
+            
+    
+        
+        
+            
+            
+            <span class="
+        
+            
+        
+    
+
+    terminal-mkdocs-side-nav-item terminal-mkdocs-side-nav-section-no-index">Installation:</span>
+        
+    
+    
+        
+      
+        
+            <ul class="terminal-mkdocs-side-nav-li-ul">
+        
+            
+            
+                
+                
+            
+
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="
+
+    terminal-mkdocs-side-nav-item" href="../setup/">Setting Up GR00T-N1.5</a>
+        
+    
+    </li>
+            
+        
+            
+            
+                
+                
+            
+
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="
+
+    terminal-mkdocs-side-nav-item" href="../setup2/">GR00T-N1.5 and MobileAI</a>
+        
+    
+    </li>
+            
+        
+            
+            
+                
+                
+            
+
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="
+
+    terminal-mkdocs-side-nav-item" href="../vr_setup/">Isaac Lab Mimic & VR</a>
+        
+    
+    </li>
+            
+            
+    </ul>
+        
+    
+  </li>
+        
     </ul>
   
 </nav><hr>
@@ -477,12 +576,12 @@
             <main id="terminal-mkdocs-main-content">
 <section id="mkdocs-terminal-content">
     <h1 id="imitation-learning-in-robotics">Imitation Learning in Robotics</h1>
-<p>Imitation learning is a paradigm where the model learns <strong>without external rewards</strong>, relying solely on <strong>demonstrations</strong> (state-action pairs).</p>
+<p>Imitation learning is a paradigm where the model learns without external rewards, relying solely on demonstrations (state-action pairs).</p>
 <hr />
 <h2 id="key-concepts">Key Concepts</h2>
 <ul>
-<li><strong>Reinforcement learning</strong> relies heavily on the reward-update loop, whereas imitation learning does not.  </li>
-<li><strong>Data sources for imitation learning</strong> can include:  <ul>
+<li>Reinforcement learning relies heavily on the reward-update loop, whereas imitation learning does not.  </li>
+<li>Data sources for imitation learning can include:  <ul>
 <li>Human demonstrations  </li>
 <li>Teleoperations  </li>
 <li>Synthetic trajectories  </li>
@@ -496,7 +595,7 @@
 <h3 id="behavioral-cloning">Behavioral Cloning</h3>
 <ul>
 <li>The agent mimics human demonstrations by copying them.  </li>
-<li><strong>Process:</strong><ul>
+<li>Process:<ul>
 <li>State-action pairs are recorded from expert demonstrations (teleoperation, direct human demos, or recordings).  </li>
 <li>The expert’s output actions become the target outputs for the agent.  </li>
 <li>The model maps input states to actions.  </li>
@@ -506,25 +605,25 @@
 </ul>
 <h3 id="inverse-reinforcement-learning-irl">Inverse Reinforcement Learning (IRL)</h3>
 <ul>
-<li>The agent <strong>infers the rewards</strong> the expert is optimizing and chooses actions based on these inferred rewards.  </li>
+<li>The agent infers the rewards the expert is optimizing and chooses actions based on these inferred rewards.  </li>
 </ul>
 <h3 id="apprenticeship-learning">Apprenticeship Learning</h3>
 <ul>
-<li>The agent replicates the <strong>goals</strong> demonstrated by the expert <strong>without using inferred rewards</strong>.  </li>
+<li>The agent replicates the goals demonstrated by the expert without using inferred rewards.  </li>
 </ul>
 <hr />
 <h2 id="benefits">Benefits</h2>
 <ul>
-<li>Ideal for robots with <strong>high degrees of freedom (DoF)</strong>.  </li>
-<li>Mimicking human movements results in <strong>more fluid robot actions</strong>.  </li>
-<li>Robot movements can be <strong>improved through continuous practice</strong>.  </li>
+<li>Ideal for robots with high degrees of freedom (DoF).  </li>
+<li>Mimicking human movements results in more fluid robot actions.  </li>
+<li>Robot movements can be improved through continuous practice.  </li>
 </ul>
 <hr />
 <h2 id="limitations">Limitations</h2>
 <ul>
-<li>Requires <strong>large and varied datasets</strong> for proper generalization.  </li>
-<li>Real-world data may contain <strong>noise, human error, or inconsistencies</strong> that the agent could learn.  </li>
-<li>Small mistakes in imitation may <strong>accumulate over time</strong>, leading to incorrect learned behaviors.  </li>
+<li>Requires large and varied datasets for proper generalization.  </li>
+<li>Real-world data may contain noise, human error, or inconsistencies that the agent could learn.  </li>
+<li>Small mistakes in imitation may accumulate over time, leading to incorrect learned behaviors.  </li>
 </ul>
 <h2 id="references">References</h2>
 <ul>

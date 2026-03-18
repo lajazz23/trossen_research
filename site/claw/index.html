@@ -30,8 +30,8 @@
 <link href="../css/theme.css" rel="stylesheet">
 <link href="../css/theme.tile_grid.css" rel="stylesheet">
 <link href="../css/theme.footer.css" rel="stylesheet">
-<!-- dark color palette -->
-<link href="../css/palettes/dark.css" rel="stylesheet">
+<!-- light color palette -->
+<link href="../css/palettes/light.css" rel="stylesheet">
 
 <!-- page layout -->
 <style>
@@ -112,6 +112,8 @@
                     </a>
                     <meta property="position" content="1">
                 </li>
+                
+                
                 
                 
                 
@@ -464,6 +466,103 @@
     
   </li>
         
+          
+
+
+
+<li class="terminal-mkdocs-side-nav-li">
+    
+    
+        
+        
+            
+                
+        
+
+        
+            
+    
+        
+        
+            
+            
+            <span class="
+        
+            
+        
+    
+
+    terminal-mkdocs-side-nav-item terminal-mkdocs-side-nav-section-no-index">Installation:</span>
+        
+    
+    
+        
+      
+        
+            <ul class="terminal-mkdocs-side-nav-li-ul">
+        
+            
+            
+                
+                
+            
+
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="
+
+    terminal-mkdocs-side-nav-item" href="../setup/">Setting Up GR00T-N1.5</a>
+        
+    
+    </li>
+            
+        
+            
+            
+                
+                
+            
+
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="
+
+    terminal-mkdocs-side-nav-item" href="../setup2/">GR00T-N1.5 and MobileAI</a>
+        
+    
+    </li>
+            
+        
+            
+            
+                
+                
+            
+
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="
+
+    terminal-mkdocs-side-nav-item" href="../vr_setup/">Isaac Lab Mimic & VR</a>
+        
+    
+    </li>
+            
+            
+    </ul>
+        
+    
+  </li>
+        
     </ul>
   
 </nav><hr>
@@ -477,34 +576,34 @@
             <main id="terminal-mkdocs-main-content">
 <section id="mkdocs-terminal-content">
     <h1 id="claw-clip-language-action-for-weight">CLAW (CLIP-Language-Action for Weight)</h1>
-<p><strong>CLAW</strong> is a <strong>weight-aware Vision-Language-Action (VLA) model</strong> that decouples condition evaluation from action generation.  </p>
+<p>CLAW is a weight-aware Vision-Language-Action (VLA) model that decouples condition evaluation from action generation.  </p>
 <hr />
 <h2 id="key-features">Key Features</h2>
 <ul>
-<li>Uses a <strong>condition-monitoring module</strong> to evaluate numeric task constraints (e.g., weight thresholds) for action output.  </li>
-<li>Combines <strong>CLIP</strong> and <strong>π0</strong> for continuous visuomotor control:  </li>
-<li><strong>CLIP</strong> converts numeric readings into symbolic language prompts, ideal for detecting when a weight threshold is reached.<br />
+<li>Uses a condition-monitoring module to evaluate numeric task constraints (e.g., weight thresholds) for action output.  </li>
+<li>Combines CLIP and π0 for continuous visuomotor control:  </li>
+<li>CLIP converts numeric readings into symbolic language prompts, ideal for detecting when a weight threshold is reached.<br />
         - Determines if the robot should grip harder or stop.  </li>
-<li><strong>π0</strong> produces continuous, high-frequency robot actions from <strong>multi-view observations</strong>.<br />
+<li>π0 produces continuous, high-frequency robot actions from multi-view observations.<br />
         - Maps observations + language input into continuous motor commands.  </li>
 <li>Together:<br />
         - CLIP labels the task ("grip" or "no grip")<br />
         - Passes this prompt to π0<br />
-        - π0 is fine-tuned using <strong>flow-matching loss</strong> conditioned on the prompts  </li>
+        - π0 is fine-tuned using flow-matching loss conditioned on the prompts  </li>
 </ul>
 <hr />
 <h2 id="motivation">Motivation</h2>
 <ul>
-<li>Standard VLAs often struggle with <strong>precise execution</strong>, particularly for manipulation tasks like <strong>picking up objects</strong>.  </li>
-<li>CLAW addresses this by integrating <strong>weight awareness</strong> into the decision-making process.  </li>
+<li>Standard VLAs often struggle with precise execution, particularly for manipulation tasks like picking up objects.  </li>
+<li>CLAW addresses this by integrating weight awareness into the decision-making process.  </li>
 </ul>
 <hr />
 <h2 id="claw-pipeline">CLAW Pipeline</h2>
 <ol>
-<li><strong>Language Input</strong>  </li>
-<li><strong>CLIP</strong> monitors the scale → outputs “stop” or “continue” based on weight threshold  </li>
-<li><strong>π0</strong> generates continuous robot actions using the CLIP prompt + multi-view images  </li>
-<li>Loop continues until the <strong>target weight is reached</strong>  </li>
+<li>Language Input  </li>
+<li>CLIP monitors the scale → outputs “stop” or “continue” based on weight threshold  </li>
+<li>π0 generates continuous robot actions using the CLIP prompt + multi-view images  </li>
+<li>Loop continues until the target weight is reached  </li>
 </ol>
 <hr />
 <p>Made by Jasmin Lin.</p>
@@ -520,7 +619,8 @@
         <div id="terminal-mkdocs-footer-prev-next">
             <nav class="btn-group">
                 <a href="../rt/" title="RT-1">Previous</a>
-                
+                |
+                <a href="../setup/" title="Setting Up GR00T-N1.5">Next</a>
             </nav>
         </div>
     </div>
