@@ -10,7 +10,7 @@
     
     <meta name="author" content="lajazz23"> 
     
-    <link rel="canonical" href="https://lajazz23.github.io/trossen_research/foundation/"><link rel="icon" type="image/png" sizes="192x192" href="../img/android-chrome-192x192.png" />
+    <link rel="canonical" href="https://lajazz23.github.io/trossen_research/setupgroot/"><link rel="icon" type="image/png" sizes="192x192" href="../img/android-chrome-192x192.png" />
 <link rel="icon" type="image/png" sizes="512x512" href="../img/android-chrome-512x512.png" />
 <link rel="apple-touch-icon" sizes="180x180" href="../img/apple-touch-icon.png" />
 <link rel="shortcut icon" type="image/png" sizes="48x48" href="../img/favicon.ico" />
@@ -20,7 +20,7 @@
 
     
  
-<title>Foundation Models - Research for Trossen MobileAI</title>
+<title>Setting Up GR00TN1.6 - Research for Trossen MobileAI</title>
 
 
 <link href="../css/fontawesome/css/fontawesome.min.css" rel="stylesheet">
@@ -198,13 +198,17 @@
             
     
         
-        <span class="
+        
+            
+            
+            <span class="
         
             
         
     
 
-    terminal-mkdocs-side-nav-item--active terminal-mkdocs-side-nav-section-no-index">Robotics:</span>
+    terminal-mkdocs-side-nav-item terminal-mkdocs-side-nav-section-no-index">Robotics:</span>
+        
     
     
         
@@ -260,9 +264,11 @@
                 <li class="terminal-mkdocs-side-nav-li-ul-li">
     
         
-        <span class="
+        
+            <a class="
 
-    terminal-mkdocs-side-nav-item--active">Foundation Models</span>
+    terminal-mkdocs-side-nav-item" href="../foundation/">Foundation Models</a>
+        
     
     </li>
             
@@ -483,17 +489,13 @@
             
     
         
-        
-            
-            
-            <span class="
+        <span class="
         
             
         
     
 
-    terminal-mkdocs-side-nav-item terminal-mkdocs-side-nav-section-no-index">Installation:</span>
-        
+    terminal-mkdocs-side-nav-item--active terminal-mkdocs-side-nav-section-no-index">Installation:</span>
     
     
         
@@ -530,11 +532,9 @@
                 <li class="terminal-mkdocs-side-nav-li-ul-li">
     
         
-        
-            <a class="
+        <span class="
 
-    terminal-mkdocs-side-nav-item" href="../setupgroot/">Setting Up GR00TN1.6</a>
-        
+    terminal-mkdocs-side-nav-item--active">Setting Up GR00TN1.6</span>
     
     </li>
             
@@ -587,31 +587,20 @@
 </nav><hr>
 <nav>
     <ul>
-        <li><a href="#foundation-models-in-robotics">Foundation Models in Robotics</a></li>
-        <li><a href="#current-challenges">Current Challenges</a></li>
+        <li><a href="#setup-for-gr00t-n16">Setup for GR00T-N1.6</a></li>
+        <li><a href="#installing-the-repo">Installing the repo</a></li>
     </ul>
 </nav>
 </aside>
             <main id="terminal-mkdocs-main-content">
 <section id="mkdocs-terminal-content">
-    <h1 id="foundation-models-in-robotics">Foundation Models in Robotics</h1>
-<p>Implementation of foundation models requires pre-training on datasets to allow for higher generalization and adaptability:</p>
-<ul>
-<li>Robots learn value functions to determine lowest cost, optimal movements  </li>
-<li>High-level understanding of language-driven tasks  </li>
-<li>Zero-shot deployment from simulation-based training  </li>
-<li>Cross-embodied transfer of capabilities  </li>
-</ul>
-<hr />
-<h2 id="current-challenges">Current Challenges</h2>
-<ul>
-<li>Scarce access to data  </li>
-<li>Not all models are able to perform in real-time  </li>
-<li>A model that can generalize across all tasks and environments does not exist  </li>
-<li>Robots lack the ability to truly combine all “senses” to create the perfect behavior</li>
-</ul>
-<hr />
-<p>Made by Jasmin Lin.</p>
+    <h1 id="setup-for-gr00t-n16">Setup for GR00T-N1.6</h1>
+<h2 id="installing-the-repo">Installing the repo</h2>
+<p>First, clone the <a href="https://github.com/NVIDIA/Isaac-GR00T">repository</a>.</p>
+<pre><code class="language-bash">git clone --recurse-submodules https://github.com/NVIDIA/Isaac-GR00T
+cd Isaac-GR00T
+</code></pre>
+<p>This project uses uv. </p>
 </section>
 
             </main>
@@ -623,9 +612,9 @@
         </div>
         <div id="terminal-mkdocs-footer-prev-next">
             <nav class="btn-group">
-                <a href="../imitation/" title="Imitation Learning">Previous</a>
+                <a href="../setup/" title="Setting Up GR00T-N1.5">Previous</a>
                 |
-                <a href="../embodied/" title="Embodied AI">Next</a>
+                <a href="../setuppi/" title="Setting Up Openpi">Next</a>
             </nav>
         </div>
     </div>

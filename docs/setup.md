@@ -3,7 +3,7 @@
 First, clone the [repository](https://github.com/NVIDIA/Isaac-GR00T/tree/n1.5-release).
 
 ```bash
-git clone https://github.com/NVIDIA/Isaac-GR00T
+git clone --depth 1 --branch n1.5-release https://github.com/NVIDIA/Isaac-GR00T.git
 cd Isaac-GR00T
 ```
 
@@ -102,6 +102,168 @@ python scripts/gr00t_finetune.py --dataset-path ./demo_data/robot_sim.PickNPlace
 
 ![Graph](assets/grootgraphs.png)
 
+
+## Fine-tuning on Our Dataset
+GR00T-N1.5 does not have pre-defined configs for robots like the Trossen MobileAI, where it is not a full humanoid yet it has bimanual arms that have end-effector control. Thus, we will have to customize our script.
+
+Let's understand the format of the recorded data first. The Trossen MobileAI records its data in lerobot format, where it outputs `parquet` files containing the robot state and action vectors. Both arms' joints and velocities are already concatenated, with the grippers inside the flattened vector. This means that both arms are logged into one vector.
+
+This is great, because we can treat the action and state as one modality, without need to split it by left or right arms. The format of the dataset is:
+
+```json
+# Action (16-D)
+0  linear_vel
+1  angular_vel
+2  left_joint_0
+3  left_joint_1
+4  left_joint_2
+5  left_joint_3
+6  left_joint_4
+7  left_joint_5
+8  left_joint_6
+9  right_joint_0
+10 right_joint_1
+11 right_joint_2
+12 right_joint_3
+13 right_joint_4
+14 right_joint_5
+15 right_joint_6
+
+# State (19-D)
+0  odom_x
+1  odom_y
+2  odom_theta
+3  linear_vel
+4  angular_vel
+5–11  left_joint_0 ... left_joint_6
+12–18 right_joint_0 ... right_joint_6
+
+# Cameras
+observation.images.cam_high
+observation.images.cam_left_wrist
+observation.images.cam_right_wrist
+```
+
+Now here's a problem--like most of the VLAs I've worked with, GR00T-N1.5 has a specific way to read the data, and unfortunately, our dataset isn't fully readable by it yet.
+
+Here are the changes I've done:
+
+- Add a custom config file for the Trossen MobileAI robot to the [data_config.py](https://github.com/lajazz23/MobileAI-GR00TN1.5/blob/main/gr00t/experiment/data_config.py) file.  
+    1. As shown above, the cameras are conventionally named "observation.images...", but it must be changed. 
+    2. I removed all instances of that, so that only "cam_..." was left. This includes renaming the video folders in the dataset.
+    
+- Added a `modality.json` file to the `dataset/meta` folder from our dataset. Something like this:
+```json
+{
+  "state": {
+    "observation": {
+      "start": 0,
+      "end": 19,
+      "fields": {
+        "odom_x": {
+          "start": 0,
+          "end": 1,
+          "dtype": "float32"
+        },
+        "odom_y": {
+          "start": 1,
+          "end": 2,
+          "dtype": "float32"
+        },
+        "odom_theta": {
+          "start": 2,    
+          "end": 3,
+          "dtype": "float32",
+          "range": [-3.1416, 3.1416]
+        },
+
+        "linear_vel": {
+          "start": 3,
+          "end": 4,
+          "dtype": "float32"
+        },
+        "angular_vel": {
+          "start": 4,
+          "end": 5,
+          "dtype": "float32"
+        },
+
+        "left_joint_0": {
+          "start": 5,
+          "end": 6,
+          "dtype": "float32",
+          "range": [-3.1416, 3.1416]
+        },...
+        }
+     } 
+ },
+
+  "action": {
+    "action": {
+      "start": 0,
+      "end": 16,
+      "fields": {
+        "linear_vel": {
+          "start": 0,
+          "end": 1,
+          "absolute": true,
+          "dtype": "float32"
+        },
+        "angular_vel": {
+          "start": 1,
+          "end": 2,
+          "absolute": true,
+          "dtype": "float32"
+        },
+
+        "left_joint_0": {
+          "start": 2,
+          "end": 3,
+          "absolute": true,
+          "dtype": "float32",
+          "range": [-3.1416, 3.1416]
+        },...
+          }
+     }
+},
+
+  "video": {
+    "cam_high": {
+      "original_key": "cam_high"
+    },
+    "cam_left_wrist": {
+      "original_key": "cam_left_wrist"
+    },
+    "cam_right_wrist": {
+      "original_key": "cam_right_wrist"
+    }
+  },
+
+  "annotation": {
+    "human.task_description": {
+      "original_key": "task_index"
+    }
+  }
+}
+```
+
+- Must make sure `info.json` matches `modality.json`.
+
+
+## Deploying on the MobileAI (Software)
+
+Let's now try to work on getting the policy deployed on the actual robot. Since GR00T-N1.5 uses a client-server setup, we need to tweak it to be able to send the inference to the robot configurations.
+
+The documentation mentions 2 client modes--**ZMQ** and **HTTPS**.
+- ZMQ is lightweight and fast, making it  good for local network.
+- HTTP is better for connecting remotely to the robot.
+
+Let's use ZMQ, since we want to connect to the robot directly.
+
+
+
+
+
 ## Troubleshooting
 
 **Error:** 
@@ -163,6 +325,14 @@ ImportError: torchcodec is not available.
 ```bash
 pip install torchcodec==0.5.0
 ```
+
+------------------------------------------------------------------------
+
+**Error:** Not enought memory (dependent on size of dataset).
+
+**Solution:** Change the batch size in `Isaac-GR00T/scripts/gr00t_finetune.py` to a smaller number.
+
+
 
 ----
 Made by Jasmin Lin.

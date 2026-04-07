@@ -33,7 +33,9 @@ nav:
       - CLAW: 'claw.md'
   - Installation::
       - Setting Up GR00T-N1.5: 'setup.md'
-      - GR00T-N1.5 and MobileAI: 'setup2.md'
+      - Setting Up GR00TN1.6: 'setupgroot.md'
+      - Setting Up Openpi: 'setuppi.md'
+
       - Isaac Lab Mimic & VR: 'vr_setup.md'
 
 extra_css:
