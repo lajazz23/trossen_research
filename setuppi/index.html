@@ -10,7 +10,7 @@
     
     <meta name="author" content="lajazz23"> 
     
-    <link rel="canonical" href="https://lajazz23.github.io/trossen_research/setup2/"><link rel="icon" type="image/png" sizes="192x192" href="../img/android-chrome-192x192.png" />
+    <link rel="canonical" href="https://lajazz23.github.io/trossen_research/setuppi/"><link rel="icon" type="image/png" sizes="192x192" href="../img/android-chrome-192x192.png" />
 <link rel="icon" type="image/png" sizes="512x512" href="../img/android-chrome-512x512.png" />
 <link rel="apple-touch-icon" sizes="180x180" href="../img/apple-touch-icon.png" />
 <link rel="shortcut icon" type="image/png" sizes="48x48" href="../img/favicon.ico" />
@@ -20,7 +20,7 @@
 
     
  
-<title>GR00T-N1.5 and MobileAI - Research for Trossen MobileAI</title>
+<title>Setting Up Openpi - Research for Trossen MobileAI</title>
 
 
 <link href="../css/fontawesome/css/fontawesome.min.css" rel="stylesheet">
@@ -532,9 +532,28 @@
                 <li class="terminal-mkdocs-side-nav-li-ul-li">
     
         
+        
+            <a class="
+
+    terminal-mkdocs-side-nav-item" href="../setupgroot/">Setting Up GR00TN1.6</a>
+        
+    
+    </li>
+            
+        
+            
+            
+                
+                
+            
+
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
         <span class="
 
-    terminal-mkdocs-side-nav-item--active">GR00T-N1.5 and MobileAI</span>
+    terminal-mkdocs-side-nav-item--active">Setting Up Openpi</span>
     
     </li>
             
@@ -568,202 +587,89 @@
 </nav><hr>
 <nav>
     <ul>
-        <li><a href="#setup-for-incorporating-gr00t-n15-with-trossen-mobileai">Setup for Incorporating GR00T-N1.5 with Trossen MobileAI</a></li>
-        <li><a href="#fine-tuning-on-our-dataset">Fine-tuning on Our Dataset</a></li><li><a href="#deploying-on-the-mobileai-software">Deploying on the MobileAI (Software)</a></li><li><a href="#comparison-to-openpi">Comparison to OpenPi</a></li>
+        <li><a href="#setup-for-incorporating-pi005-with-trossen-mobileai">Setup for Incorporating Pi0/0.5 with Trossen MobileAI</a></li>
+        <li><a href="#fine-tuning-on-our-dataset">Fine-tuning on Our Dataset</a></li><li><a href="#troubleshooting">Troubleshooting</a></li>
     </ul>
 </nav>
 </aside>
             <main id="terminal-mkdocs-main-content">
 <section id="mkdocs-terminal-content">
-    <h1 id="setup-for-incorporating-gr00t-n15-with-trossen-mobileai">Setup for Incorporating GR00T-N1.5 with Trossen MobileAI</h1>
+    <h1 id="setup-for-incorporating-pi005-with-trossen-mobileai">Setup for Incorporating Pi0/0.5 with Trossen MobileAI</h1>
+<p>Trossen Robotics has their own <a href="https://github.com/trossenRobotics/openpi">fork</a> of the OpenPi repository. The recorded dataset <strong>must be Lerobot v2.1</strong> to be compatible with Pi0/0.5 training.</p>
+<p>An example dataset folder structure is as follows:</p>
+<pre><code>.
+├── data
+│   └── chunk-000
+│       ├── episode_000000.parquet
+│       └── ...
+├── meta
+│   ├── episodes.jsonl
+│   ├── episodes_stats.jsonl
+│   ├── info.json
+│   ├── stats.json
+│   └── tasks.jsonl
+└── videos
+    └── chunk-000
+        ├── observation.images.cam_high
+        │   ├── episode_000000.mp4
+        │   └── ...
+        ├── observation.images.cam_left
+        │   ├── episode_000000.mp4
+        │   └── ...
+        └── observation.images.cam_right
+            ├── episode_000000.mp4
+            └── ...
+</code></pre>
+<p>Next, navigate to <code>openpi/src/openpi/training/config.py</code>. Here we will be defining the data config for the model. </p>
+<pre><code class="language-python">    TrainConfig(
+        name={data config name},
+        model=pi0_config.Pi0Config(pi05=True),
+        data=LeRobotAlohaDataConfig(
+            use_delta_joint_actions=False,
+            adapt_to_pi=False,
+            repo_id={local dataset},
+            assets=AssetsConfig(
+                assets_dir=&quot;gs://openpi-assets/checkpoints/pi05_base/assets&quot;,
+                asset_id=&quot;trossen&quot;,
+            ),
+            default_prompt=&quot;grab and handover the red cube&quot;,
+            repack_transforms=_transforms.Group(
+                inputs=[
+                    _transforms.RepackTransform(
+                        {
+                            &quot;images&quot;: {
+                                &quot;cam_high&quot;: &quot;observation.images.cam_high&quot;,
+                                &quot;cam_left_wrist&quot;: &quot;observation.images.cam_left&quot;,
+                                &quot;cam_right_wrist&quot;: &quot;observation.images.cam_right&quot;,
+                            },
+                            &quot;state&quot;: &quot;observation.state&quot;,
+                            &quot;actions&quot;: &quot;action&quot;,
+                        }
+                    )
+                ]
+            ),
+        ),
+
+        weight_loader=weight_loaders.CheckpointWeightLoader(&quot;gs://openpi-assets/checkpoints/pi05_base/params&quot;),
+        num_train_steps=20_000,
+        batch_size=4,
+    ),
+</code></pre>
+<p>In the example above, I'm passing a local dataset, but natively Hugging Face datasets are supported.</p>
 <h2 id="fine-tuning-on-our-dataset">Fine-tuning on Our Dataset</h2>
-<p>GR00T-N1.5 does not have pre-defined configs for robots like the Trossen MobileAI, where it is not a full humanoid yet it has bimanual arms that have end-effector control. Thus, we will have to customize our script.</p>
-<p>Let's understand the format of the recorded data first. The Trossen MobileAI records its data in lerobot format, where it outputs <code>parquet</code> files containing the robot state and action vectors. Both arms' joints and velocities are already concatenated, with the grippers inside the flattened vector. This means that both arms are logged into one vector.</p>
-<p>This is great, because we can treat the action and state as one modality, without need to split it by left or right arms. The format of the dataset is:</p>
-<pre><code class="language-json"># Action (16-D)
-0  linear_vel
-1  angular_vel
-2  left_joint_0
-3  left_joint_1
-4  left_joint_2
-5  left_joint_3
-6  left_joint_4
-7  left_joint_5
-8  left_joint_6
-9  right_joint_0
-10 right_joint_1
-11 right_joint_2
-12 right_joint_3
-13 right_joint_4
-14 right_joint_5
-15 right_joint_6
-
-# State (19-D)
-0  odom_x
-1  odom_y
-2  odom_theta
-3  linear_vel
-4  angular_vel
-5–11  left_joint_0 ... left_joint_6
-12–18 right_joint_0 ... right_joint_6
-
-# Cameras
-observation.images.cam_high
-observation.images.cam_left_wrist
-observation.images.cam_right_wrist
+<p>To begin inference, run:</p>
+<pre><code class="language-bash">XLA_PYTHON_CLIENT_MEM_FRACTION=0.9 uv run --no-sync scripts/train.py {config_name} --exp-name={name} --overwrite
 </code></pre>
-<p>Now here's a problem--like most of the VLAs I've worked with, GR00T-N1.5 has a specific way to read the data, and unfortunately, our dataset isn't fully readable by it yet.</p>
-<p>Here are the changes I've done:</p>
-<ul>
-<li>
-<p>Add a custom config file for the Trossen MobileAI robot to the <a href="https://github.com/lajazz23/MobileAI-GR00TN1.5/blob/main/gr00t/experiment/data_config.py">data_config.py</a> file.  </p>
-<ol>
-<li>As shown above, the cameras are conventionally named "observation.images...", but it must be changed. </li>
-<li>I removed all instances of that, so that only "cam_..." was left. This includes renaming the video folders in the dataset.</li>
-</ol>
-</li>
-<li>
-<p>Added a <code>modality.json</code> file to the <code>dataset/meta</code> folder from our dataset. Something like this:</p>
-</li>
-</ul>
-<pre><code class="language-json">{
-  &quot;state&quot;: {
-    &quot;observation&quot;: {
-      &quot;start&quot;: 0,
-      &quot;end&quot;: 19,
-      &quot;fields&quot;: {
-        &quot;odom_x&quot;: {
-          &quot;start&quot;: 0,
-          &quot;end&quot;: 1,
-          &quot;dtype&quot;: &quot;float32&quot;
-        },
-        &quot;odom_y&quot;: {
-          &quot;start&quot;: 1,
-          &quot;end&quot;: 2,
-          &quot;dtype&quot;: &quot;float32&quot;
-        },
-        &quot;odom_theta&quot;: {
-          &quot;start&quot;: 2,    
-          &quot;end&quot;: 3,
-          &quot;dtype&quot;: &quot;float32&quot;,
-          &quot;range&quot;: [-3.1416, 3.1416]
-        },
+<p>Here's an example of good training:</p>
+<pre><code>XLA_PYTHON_CLIENT_MEM_FRACTION=0.9 uv run --no-sync scripts/train.py pi05_handover_board --exp-name=board --overwrite
 
-        &quot;linear_vel&quot;: {
-          &quot;start&quot;: 3,
-          &quot;end&quot;: 4,
-          &quot;dtype&quot;: &quot;float32&quot;
-        },
-        &quot;angular_vel&quot;: {
-          &quot;start&quot;: 4,
-          &quot;end&quot;: 5,
-          &quot;dtype&quot;: &quot;float32&quot;
-        },
-
-        &quot;left_joint_0&quot;: {
-          &quot;start&quot;: 5,
-          &quot;end&quot;: 6,
-          &quot;dtype&quot;: &quot;float32&quot;,
-          &quot;range&quot;: [-3.1416, 3.1416]
-        },...
-        }
-     } 
- },
-
-  &quot;action&quot;: {
-    &quot;action&quot;: {
-      &quot;start&quot;: 0,
-      &quot;end&quot;: 16,
-      &quot;fields&quot;: {
-        &quot;linear_vel&quot;: {
-          &quot;start&quot;: 0,
-          &quot;end&quot;: 1,
-          &quot;absolute&quot;: true,
-          &quot;dtype&quot;: &quot;float32&quot;
-        },
-        &quot;angular_vel&quot;: {
-          &quot;start&quot;: 1,
-          &quot;end&quot;: 2,
-          &quot;absolute&quot;: true,
-          &quot;dtype&quot;: &quot;float32&quot;
-        },
-
-        &quot;left_joint_0&quot;: {
-          &quot;start&quot;: 2,
-          &quot;end&quot;: 3,
-          &quot;absolute&quot;: true,
-          &quot;dtype&quot;: &quot;float32&quot;,
-          &quot;range&quot;: [-3.1416, 3.1416]
-        },...
-          }
-     }
-},
-
-  &quot;video&quot;: {
-    &quot;cam_high&quot;: {
-      &quot;original_key&quot;: &quot;cam_high&quot;
-    },
-    &quot;cam_left_wrist&quot;: {
-      &quot;original_key&quot;: &quot;cam_left_wrist&quot;
-    },
-    &quot;cam_right_wrist&quot;: {
-      &quot;original_key&quot;: &quot;cam_right_wrist&quot;
-    }
-  },
-
-  &quot;annotation&quot;: {
-    &quot;human.task_description&quot;: {
-      &quot;original_key&quot;: &quot;task_index&quot;
-    }
-  }
-}
 </code></pre>
-<ul>
-<li>Must make sure <code>info.json</code> matches <code>modality.json</code>.</li>
-</ul>
-<h2 id="deploying-on-the-mobileai-software">Deploying on the MobileAI (Software)</h2>
-<p>Let's now try to work on getting the policy deployed on the actual robot. Since GR00T-N1.5 uses a client-server setup, we need to tweak it to be able to send the inference to the robot configurations.</p>
-<p>The documentation mentions 2 client modes--<strong>ZMQ</strong> and <strong>HTTPS</strong>.
-- ZMQ is lightweight and fast, making it  good for local network.
-- HTTP is better for connecting remotely to the robot.</p>
-<p>Let's use ZMQ, since we want to connect to the robot directly.</p>
-<pre><code>
+<h2 id="troubleshooting">Troubleshooting</h2>
+<h3 id="dataset-version">Dataset Version</h3>
+<p>If your dataset is v3.0 for Lerobot, you can do the following:</p>
+<pre><code>git clone --branch v0.4.4 https://github.com/huggingface/lerobot.git
 </code></pre>
-<h2 id="comparison-to-openpi">Comparison to OpenPi</h2>
-<p>Obviously GR00T-N1.5 and OpenPi have thier own formatting. In the Trossen documentation, OpenPi uses WebSocket as the server, whereas for GR00T-N1.5 we are using ZMQ. OpenPi also recieves action chunks eather than single actions, and supports temporal ensembling.</p>
-<h3 id="troubleshooting">Troubleshooting</h3>
-<p><strong>Error:</strong> Not enought memory (dependent on size of dataset).</p>
-<p><strong>Solution:</strong> Change the batch size in <code>Isaac-GR00T/scripts/gr00t_finetune.py</code> to a smaller number.</p>
-<h3 id="other-stuff">Other Stuff</h3>
-<p>If you're curious, these are the flags/options and arguments for <code>gr00t_finetune.py</code>. You can find these if you run <code>python gr00t_finetune.py --help</code>.</p>
-<p><strong>--dataset-path</strong> (STR) path to the dataset</p>
-<p><strong>--output-dir</strong> (STR) directory to save the model checkpoint</p>
-<p><strong>--data-config</strong> (STR) the data config for training      </p>
-<p><strong>--batch-size</strong> (INT) batch size for training, which is dependent on dataset size and GPU capability</p>
-<p><strong>--max-steps</strong> (INT) max training steps</p>
-<p><strong>--num-gpus</strong> (INT) number of GPUs used</p>
-<p><strong>--save-steps</strong> (INT) factor of which it saves the checkpoints</p>
-<p><strong>--base-model-path</strong> (STR) path to model to be fine-tuned on</p>
-<p><strong>--tune-llm /--no-tune-llm</strong>  fine-tune language model backbone</p>
-<p><strong>--tune-visual / --no-tune-visual</strong> for if the visual data is different from pre-training data</p>
-<p><strong>--tune-projector / --no-tune-projector</strong> helps align the embodiment-specific action and state spaces</p>
-<p><strong>--tune-diffusion-model /--no-tune-diffusion-model</strong> to finetune the diffusion model</p>
-<p><strong>--resume / --no-resume</strong> resume from a checkpoint</p>
-<p><strong>--learning-rate</strong> (FLOAT) learning rate</p>
-<p><strong>--weight-decay</strong> (FLOAT) weight decay </p>
-<p><strong>--warmup-ratio</strong>  (FLOAT) ratio of total training steps used for warmup</p>
-<p><strong>--lora-rank</strong>  (INT) rank for LoRA</p>
-<p><strong>--lora-alpha</strong> (INT) alpha value for LoRA</p>
-<p><strong>--lora-dropout</strong> (FLOAT)  dropout rate for LoRA</p>
-<p><strong>--lora-full-model / --no-lora-full-model</strong> train on full LoRA, if not, then only action head is used</p>
-<p><strong>--dataloader-num-workers</strong> (INT) number of workers for data loading per GPU. </p>
-<p><strong>--gradient-accumulation-steps</strong> (INT) gradient accumulation steps for training</p>
-<p><strong>--dataloader-prefetch-factor</strong> (INT)  prefetch factor for data loading</p>
-<p><strong>--report-to training</strong> metrics report</p>
-<p><strong>--embodiment-tag</strong> embodiement for training</p>
-<p><strong>--video-backend</strong> type of video backend for training</p>
-<p><strong>--balance-dataset-weights / --no-balance-dataset-weights</strong> balance the dataset weights</p>
-<p><strong>--balance-trajectory-weights / --no-balance-trajectory-weights</strong> sample trajectories within a dataset weighted by their length</p>
+<p>Then, you can check out this <a href="https://github.com/huggingface/lerobot/pull/2109/changes/8fd8ba739d74c7500a67f59653ad9ee09b4da25d">user's code</a> for downgrading the dataset from v3.0 to v2.1.</p>
 </section>
 
             </main>
@@ -775,7 +681,7 @@ observation.images.cam_right_wrist
         </div>
         <div id="terminal-mkdocs-footer-prev-next">
             <nav class="btn-group">
-                <a href="../setup/" title="Setting Up GR00T-N1.5">Previous</a>
+                <a href="../setupgroot/" title="Setting Up GR00TN1.6">Previous</a>
                 |
                 <a href="../vr_setup/" title="Isaac Lab Mimic & VR">Next</a>
             </nav>

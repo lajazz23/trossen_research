@@ -533,7 +533,26 @@
         
             <a class="
 
-    terminal-mkdocs-side-nav-item" href="../setup2/">GR00T-N1.5 and MobileAI</a>
+    terminal-mkdocs-side-nav-item" href="../setupgroot/">Setting Up GR00TN1.6</a>
+        
+    
+    </li>
+            
+        
+            
+            
+                
+                
+            
+
+             
+                <li class="terminal-mkdocs-side-nav-li-ul-li">
+    
+        
+        
+            <a class="
+
+    terminal-mkdocs-side-nav-item" href="../setuppi/">Setting Up Openpi</a>
         
     
     </li>
@@ -569,7 +588,7 @@
 <nav>
     <ul>
         <li><a href="#setup-for-gr00t-n15-trossen-lerobot">Setup for GR00T-N1.5 &amp; Trossen Lerobot</a></li>
-        <li><a href="#installing-the-repo">Installing the repo</a></li><li><a href="#starting-their-demos">Starting Their Demos</a></li><li><a href="#troubleshooting">Troubleshooting</a></li>
+        <li><a href="#installing-the-repo">Installing the repo</a></li><li><a href="#starting-their-demos">Starting Their Demos</a></li><li><a href="#fine-tuning-on-our-dataset">Fine-tuning on Our Dataset</a></li><li><a href="#deploying-on-the-mobileai-software">Deploying on the MobileAI (Software)</a></li><li><a href="#troubleshooting">Troubleshooting</a></li>
     </ul>
 </nav>
 </aside>
@@ -578,7 +597,7 @@
     <h1 id="setup-for-gr00t-n15-trossen-lerobot">Setup for GR00T-N1.5 &amp; Trossen Lerobot</h1>
 <h2 id="installing-the-repo">Installing the repo</h2>
 <p>First, clone the <a href="https://github.com/NVIDIA/Isaac-GR00T/tree/n1.5-release">repository</a>.</p>
-<pre><code class="language-bash">git clone https://github.com/NVIDIA/Isaac-GR00T
+<pre><code class="language-bash">git clone --depth 1 --branch n1.5-release https://github.com/NVIDIA/Isaac-GR00T.git
 cd Isaac-GR00T
 </code></pre>
 <p>Then create a conda environment for it.</p>
@@ -642,6 +661,157 @@ python deployment_scripts/gr00t_inference.py --inference-mode=tensorrt
 <pre><code class="language-bash">python scripts/gr00t_finetune.py --dataset-path ./demo_data/robot_sim.PickNPlace --num-gpus 1
 </code></pre>
 <p><img alt="Graph" src="../assets/grootgraphs.png" /></p>
+<h2 id="fine-tuning-on-our-dataset">Fine-tuning on Our Dataset</h2>
+<p>GR00T-N1.5 does not have pre-defined configs for robots like the Trossen MobileAI, where it is not a full humanoid yet it has bimanual arms that have end-effector control. Thus, we will have to customize our script.</p>
+<p>Let's understand the format of the recorded data first. The Trossen MobileAI records its data in lerobot format, where it outputs <code>parquet</code> files containing the robot state and action vectors. Both arms' joints and velocities are already concatenated, with the grippers inside the flattened vector. This means that both arms are logged into one vector.</p>
+<p>This is great, because we can treat the action and state as one modality, without need to split it by left or right arms. The format of the dataset is:</p>
+<pre><code class="language-json"># Action (16-D)
+0  linear_vel
+1  angular_vel
+2  left_joint_0
+3  left_joint_1
+4  left_joint_2
+5  left_joint_3
+6  left_joint_4
+7  left_joint_5
+8  left_joint_6
+9  right_joint_0
+10 right_joint_1
+11 right_joint_2
+12 right_joint_3
+13 right_joint_4
+14 right_joint_5
+15 right_joint_6
+
+# State (19-D)
+0  odom_x
+1  odom_y
+2  odom_theta
+3  linear_vel
+4  angular_vel
+5–11  left_joint_0 ... left_joint_6
+12–18 right_joint_0 ... right_joint_6
+
+# Cameras
+observation.images.cam_high
+observation.images.cam_left_wrist
+observation.images.cam_right_wrist
+</code></pre>
+<p>Now here's a problem--like most of the VLAs I've worked with, GR00T-N1.5 has a specific way to read the data, and unfortunately, our dataset isn't fully readable by it yet.</p>
+<p>Here are the changes I've done:</p>
+<ul>
+<li>
+<p>Add a custom config file for the Trossen MobileAI robot to the <a href="https://github.com/lajazz23/MobileAI-GR00TN1.5/blob/main/gr00t/experiment/data_config.py">data_config.py</a> file.  </p>
+<ol>
+<li>As shown above, the cameras are conventionally named "observation.images...", but it must be changed. </li>
+<li>I removed all instances of that, so that only "cam_..." was left. This includes renaming the video folders in the dataset.</li>
+</ol>
+</li>
+<li>
+<p>Added a <code>modality.json</code> file to the <code>dataset/meta</code> folder from our dataset. Something like this:</p>
+</li>
+</ul>
+<pre><code class="language-json">{
+  &quot;state&quot;: {
+    &quot;observation&quot;: {
+      &quot;start&quot;: 0,
+      &quot;end&quot;: 19,
+      &quot;fields&quot;: {
+        &quot;odom_x&quot;: {
+          &quot;start&quot;: 0,
+          &quot;end&quot;: 1,
+          &quot;dtype&quot;: &quot;float32&quot;
+        },
+        &quot;odom_y&quot;: {
+          &quot;start&quot;: 1,
+          &quot;end&quot;: 2,
+          &quot;dtype&quot;: &quot;float32&quot;
+        },
+        &quot;odom_theta&quot;: {
+          &quot;start&quot;: 2,    
+          &quot;end&quot;: 3,
+          &quot;dtype&quot;: &quot;float32&quot;,
+          &quot;range&quot;: [-3.1416, 3.1416]
+        },
+
+        &quot;linear_vel&quot;: {
+          &quot;start&quot;: 3,
+          &quot;end&quot;: 4,
+          &quot;dtype&quot;: &quot;float32&quot;
+        },
+        &quot;angular_vel&quot;: {
+          &quot;start&quot;: 4,
+          &quot;end&quot;: 5,
+          &quot;dtype&quot;: &quot;float32&quot;
+        },
+
+        &quot;left_joint_0&quot;: {
+          &quot;start&quot;: 5,
+          &quot;end&quot;: 6,
+          &quot;dtype&quot;: &quot;float32&quot;,
+          &quot;range&quot;: [-3.1416, 3.1416]
+        },...
+        }
+     } 
+ },
+
+  &quot;action&quot;: {
+    &quot;action&quot;: {
+      &quot;start&quot;: 0,
+      &quot;end&quot;: 16,
+      &quot;fields&quot;: {
+        &quot;linear_vel&quot;: {
+          &quot;start&quot;: 0,
+          &quot;end&quot;: 1,
+          &quot;absolute&quot;: true,
+          &quot;dtype&quot;: &quot;float32&quot;
+        },
+        &quot;angular_vel&quot;: {
+          &quot;start&quot;: 1,
+          &quot;end&quot;: 2,
+          &quot;absolute&quot;: true,
+          &quot;dtype&quot;: &quot;float32&quot;
+        },
+
+        &quot;left_joint_0&quot;: {
+          &quot;start&quot;: 2,
+          &quot;end&quot;: 3,
+          &quot;absolute&quot;: true,
+          &quot;dtype&quot;: &quot;float32&quot;,
+          &quot;range&quot;: [-3.1416, 3.1416]
+        },...
+          }
+     }
+},
+
+  &quot;video&quot;: {
+    &quot;cam_high&quot;: {
+      &quot;original_key&quot;: &quot;cam_high&quot;
+    },
+    &quot;cam_left_wrist&quot;: {
+      &quot;original_key&quot;: &quot;cam_left_wrist&quot;
+    },
+    &quot;cam_right_wrist&quot;: {
+      &quot;original_key&quot;: &quot;cam_right_wrist&quot;
+    }
+  },
+
+  &quot;annotation&quot;: {
+    &quot;human.task_description&quot;: {
+      &quot;original_key&quot;: &quot;task_index&quot;
+    }
+  }
+}
+</code></pre>
+<ul>
+<li>Must make sure <code>info.json</code> matches <code>modality.json</code>.</li>
+</ul>
+<h2 id="deploying-on-the-mobileai-software">Deploying on the MobileAI (Software)</h2>
+<p>Let's now try to work on getting the policy deployed on the actual robot. Since GR00T-N1.5 uses a client-server setup, we need to tweak it to be able to send the inference to the robot configurations.</p>
+<p>The documentation mentions 2 client modes--<strong>ZMQ</strong> and <strong>HTTPS</strong>.
+- ZMQ is lightweight and fast, making it  good for local network.
+- HTTP is better for connecting remotely to the robot.</p>
+<p>Let's use ZMQ, since we want to connect to the robot directly.</p>
 <h2 id="troubleshooting">Troubleshooting</h2>
 <p><strong>Error:</strong> </p>
 <pre><code class="language-bash">raise InvalidSchemaError from e
@@ -683,6 +853,9 @@ ImportError: torchcodec is not available.
 <pre><code class="language-bash">pip install torchcodec==0.5.0
 </code></pre>
 <hr />
+<p><strong>Error:</strong> Not enought memory (dependent on size of dataset).</p>
+<p><strong>Solution:</strong> Change the batch size in <code>Isaac-GR00T/scripts/gr00t_finetune.py</code> to a smaller number.</p>
+<hr />
 <p>Made by Jasmin Lin.</p>
 </section>
 
@@ -697,7 +870,7 @@ ImportError: torchcodec is not available.
             <nav class="btn-group">
                 <a href="../claw/" title="CLAW">Previous</a>
                 |
-                <a href="../setup2/" title="GR00T-N1.5 and MobileAI">Next</a>
+                <a href="../setupgroot/" title="Setting Up GR00TN1.6">Next</a>
             </nav>
         </div>
     </div>
